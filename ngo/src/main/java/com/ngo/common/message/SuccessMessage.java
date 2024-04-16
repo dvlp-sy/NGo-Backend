@@ -17,6 +17,7 @@ public enum SuccessMessage
     /**
      * User
      */
+    GET_USER_SUCCESS(OK, "유저 정보 불러오기에 성공했습니다")
 
     /**
      * News
