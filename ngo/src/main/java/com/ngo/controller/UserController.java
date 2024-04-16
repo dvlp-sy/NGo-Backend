@@ -1,6 +1,7 @@
 package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
+import com.ngo.dto.AttListDto;
 import com.ngo.dto.UserDto;
 import com.ngo.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,12 @@ public class UserController
     public ApiResponse<UserDto> getUser(@PathVariable("userId") Long userId)
     {
         return userService.getUser(userId);
+    }
+
+    @GetMapping("/user/{userId}/attendance")
+    public ApiResponse<AttListDto> getUserAttendance(@PathVariable("userId") Long userId)
+    {
+        return userService.getUserAttendance(userId);
     }
 
 }
