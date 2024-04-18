@@ -5,16 +5,16 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 public class AttDto
 {
     private final Long attendanceId;
-    private final Date date;
+    private final LocalDate date;
 
     @Builder(access = AccessLevel.PRIVATE)
-    private AttDto(Long attendanceId, Date date)
+    private AttDto(Long attendanceId, LocalDate date)
     {
         this.attendanceId = attendanceId;
         this.date = date;
