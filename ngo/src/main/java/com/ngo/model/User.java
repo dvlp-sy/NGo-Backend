@@ -35,6 +35,9 @@ public class User
     private String level;
 
     @Column
+    private String profileImage;
+
+    @Column
     private Long dayScore;
 
     @Column

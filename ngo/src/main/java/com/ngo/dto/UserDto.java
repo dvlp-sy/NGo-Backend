@@ -12,14 +12,16 @@ public class UserDto
     private final String userName;
     private final String email;
     private final String level;
+    private final String profileImage;
 
     @Builder(access = AccessLevel.PRIVATE)
-    private UserDto(Long userId, String userName, String email, String level)
+    private UserDto(Long userId, String userName, String email, String level, String profileImage)
     {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
         this.level = level;
+        this.profileImage = profileImage;
     }
 
     public static UserDto build(User user)
@@ -29,6 +31,7 @@ public class UserDto
                 .userName(user.getUserName())
                 .email(user.getEmail())
                 .level(user.getLevel())
+                .profileImage(user.getProfileImage())
                 .build();
     }
 
