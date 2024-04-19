@@ -8,6 +8,7 @@ import com.ngo.common.message.SuccessMessage;
 import com.ngo.dto.AttDto;
 import com.ngo.dto.AttListDto;
 import com.ngo.dto.UserDto;
+import com.ngo.dto.UserLevelDto;
 import com.ngo.model.Attendance;
 import com.ngo.model.User;
 import com.ngo.repository.AttendanceRepository;
@@ -32,12 +33,31 @@ public class UserService
         this.attendanceRepository = attendanceRepository;
     }
 
+    /**
+     * 유저 정보 관리
+     */
+
     public ApiResponse<UserDto> getUser(Long userId)
     {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
         return ApiResponse.success(SuccessMessage.GET_USER_SUCCESS, UserDto.build(user));
     }
+
+    public ApiResponse<UserLevelDto> patchUserLevel(Long userId, UserLevelDto userLevelDto)
+    {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
+
+        user.setLevel(userLevelDto.getLevel());
+        userRepository.save(user);
+
+        return ApiResponse.success(SuccessMessage.PATCH_USER_LEVEL_SUCCESS, userLevelDto);
+    }
+
+    /**
+     * 출석 정보 관리
+     */
 
     public ApiResponse<AttListDto> getUserAttendance(Long userId)
     {
