@@ -29,6 +29,12 @@ public class UserController
         return userService.getUserAttendance(userId);
     }
 
+    @GetMapping("user/{userId}/recentAttendance")
+    public ApiResponse<AttListDto> getRecentAttendance(@PathVariable("userId") Long userId)
+    {
+        return userService.getRecentAttendance(userId);
+    }
+
     @PostMapping("/user/{userId}/attendance")
     public ApiResponse<AttDto> postUserAttendance(@PathVariable("userId") Long userId)
     {
