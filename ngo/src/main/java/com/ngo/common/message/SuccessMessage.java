@@ -19,7 +19,8 @@ public enum SuccessMessage
      */
     GET_USER_SUCCESS(OK, "유저 정보 불러오기에 성공했습니다"),
     GET_USER_ATTENDANCE_SUCCESS(OK, "출석 정보 불러오기에 성공했습니다"),
-    POST_USER_ATTENDANCE_SUCCESS(CREATED, "출석 정보 업데이트에 성공했습니다")
+    POST_USER_ATTENDANCE_SUCCESS(CREATED, "출석 정보 업데이트에 성공했습니다"),
+    PATCH_USER_LEVEL_SUCCESS(OK, "레벨 정보 업데이트에 성공했습니다"),
 
     /**
      * News
