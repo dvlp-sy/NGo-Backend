@@ -3,8 +3,8 @@ package com.ngo.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,4 +37,18 @@ public class Scrap
     @OneToMany(mappedBy = "scrap", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<Memo> memos = new HashSet<>();
+
+    @Autowired
+    public Scrap() {}
+
+    @Autowired
+    @Builder(access = AccessLevel.PUBLIC)
+    public Scrap(String title, String link, String media, User user)
+    {
+        this.title = title;
+        this.link = link;
+        this.media = media;
+        this.user = user;
+    }
+
 }
