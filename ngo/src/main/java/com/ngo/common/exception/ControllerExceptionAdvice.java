@@ -20,6 +20,15 @@ public class ControllerExceptionAdvice
         return ResponseEntity.status(NOT_FOUND).body(ApiResponse.error(exception.getError(), exception.getMessage()));
     }
 
+    /**
+     * 409 CONFLICT
+     */
+
+    @ExceptionHandler({ConflictException.class})
+    public ResponseEntity<ApiResponse> ConflictException(BaseException exception)
+    {
+        return ResponseEntity.status(CONFLICT).body(ApiResponse.error(exception.getError(), exception.getMessage()));
+    }
 
     /**
      * 500 INTERNAL SERVER ERROR

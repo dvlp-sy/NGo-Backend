@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +23,7 @@ public class TodayNews
 
     @Column
     @CreatedDate
-    private Date date;
+    private LocalDate date;
 
     @Column(nullable = false)
     private String title;
