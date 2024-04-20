@@ -30,6 +30,8 @@ public enum SuccessMessage
      * Scrap
      */
 
+    POST_SCRAP_SUCCESS(CREATED, "스크랩 업로드에 성공했습니다")
+
     /**
      * Dictionary
      */
