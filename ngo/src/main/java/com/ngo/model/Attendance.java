@@ -1,0 +1,42 @@
+package com.ngo.model;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@Table
+@Entity
+public class Attendance
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "attendance_id")
+    private Long attendanceId;
+
+    @Column(nullable = false)
+    @CreatedDate
+    private LocalDate date;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
+    private User user;
+
+    @Autowired
+    public Attendance() {}
+
+    @Autowired
+    public Attendance(LocalDate date, User user)
+    {
+        this.date = date;
+        this.user = user;
+    }
+
+}
