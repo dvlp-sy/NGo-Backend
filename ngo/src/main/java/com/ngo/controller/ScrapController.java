@@ -3,10 +3,7 @@ package com.ngo.controller;
 import com.ngo.common.ApiResponse;
 import com.ngo.dto.ScrapDto;
 import com.ngo.service.ScrapService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ScrapController
@@ -20,4 +17,11 @@ public class ScrapController
     {
         return scrapService.postScrap(userId, scrapDto);
     }
+
+    @DeleteMapping("/user/{userId}/scrap/{scrapId}")
+    public ApiResponse<ScrapDto> deleteScrap(@PathVariable("userId") Long userId, @PathVariable("scrapId") Long scrapId)
+    {
+        return scrapService.deleteScrap(userId, scrapId);
+    }
+
 }

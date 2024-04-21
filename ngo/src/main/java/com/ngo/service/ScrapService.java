@@ -43,6 +43,18 @@ public class ScrapService
         return ApiResponse.success(SuccessMessage.POST_SCRAP_SUCCESS, scrapDto);
     }
 
+    public ApiResponse<ScrapDto> deleteScrap(Long userId, Long scrapId)
+    {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
+
+        Scrap scrap = scrapRepository.findById(scrapId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.SCRAP_NOT_FOUND));
+
+        scrapRepository.delete(scrap);
+        return ApiResponse.success(SuccessMessage.DELETE_SCRAP_SUCCESS);
+    }
+
     /**
      * 메모 관리
      */
