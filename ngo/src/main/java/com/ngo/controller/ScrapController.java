@@ -1,6 +1,8 @@
 package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
+import com.ngo.dto.MemoDto;
+import com.ngo.dto.MemoGetDto;
 import com.ngo.dto.ScrapDto;
 import com.ngo.dto.ScrapListDto;
 import com.ngo.service.ScrapService;
@@ -12,6 +14,10 @@ public class ScrapController
     private final ScrapService scrapService;
 
     public ScrapController(ScrapService scrapService) { this.scrapService = scrapService; }
+
+    /**
+     * 스크랩 관리
+     */
 
     @GetMapping("/user/{userId}/scrap")
     public ApiResponse<ScrapListDto> getAllScraps(@PathVariable("userId") Long userId)
@@ -31,4 +37,13 @@ public class ScrapController
         return scrapService.deleteScrap(userId, scrapId);
     }
 
+    /**
+     * 메모 관리
+     */
+
+    @PostMapping("/user/{userId}/scrap/{scrapId}/memo")
+    public ApiResponse<MemoGetDto> postMemo(@PathVariable("userId") Long userId, @PathVariable("scrapId") Long scrapId, @RequestBody MemoDto memoDto)
+    {
+        return scrapService.postMemo(userId, scrapId, memoDto);
+    }
 }
