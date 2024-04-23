@@ -2,6 +2,7 @@ package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
 import com.ngo.dto.ScrapDto;
+import com.ngo.dto.ScrapGetDto;
 import com.ngo.service.ScrapService;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,12 @@ public class ScrapController
     private final ScrapService scrapService;
 
     public ScrapController(ScrapService scrapService) { this.scrapService = scrapService; }
+
+    @GetMapping("/user/{userId}/scrap/{scrapId}")
+    public ApiResponse<ScrapGetDto> getScrap(@PathVariable("userId") Long userId, @PathVariable("scrapId") Long scrapId)
+    {
+        return scrapService.getScrap(userId, scrapId);
+    }
 
     @PostMapping("/user/{userId}/scrap")
     public ApiResponse<ScrapDto> postScrap(@PathVariable("userId") Long userId, @RequestBody ScrapDto scrapDto)
