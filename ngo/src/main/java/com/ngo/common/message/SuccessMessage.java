@@ -29,7 +29,7 @@ public enum SuccessMessage
     /**
      * Scrap
      */
-
+    GET_SCRAP_SUCCESS(OK, "스크랩 불러오기에 성공했습니다"),
     POST_SCRAP_SUCCESS(CREATED, "스크랩 업로드에 성공했습니다"),
     DELETE_SCRAP_SUCCESS(NO_CONTENT, "스크랩 삭제에 성공했습니다")
 
