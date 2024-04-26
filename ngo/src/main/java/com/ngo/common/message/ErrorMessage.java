@@ -28,7 +28,8 @@ public enum ErrorMessage
     /**
      * Scrap
      */
-    SCRAP_NOT_FOUND(NOT_FOUND, "스크랩이 존재하지 않습니다")
+    SCRAP_NOT_FOUND(NOT_FOUND, "스크랩이 존재하지 않습니다"),
+    MEMO_NOT_FOUND(NOT_FOUND, "메모가 존재하지 않습니다")
 
     /**
      * Dictionary
