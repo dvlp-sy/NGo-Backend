@@ -14,9 +14,10 @@ public class RankController
 
     public RankController(RankService rankService) { this.rankService = rankService; }
 
-    @PatchMapping("/user/{userId}/daily-rank")
-    public ApiResponse<ScoreDto> patchDailyScore(@PathVariable("userId") Long userId)
+    @PatchMapping("/user/{userId}/rank")
+    public ApiResponse<ScoreDto> patchScore(@PathVariable("userId") Long userId)
     {
-        return rankService.patchDailyScore(userId);
+        return rankService.patchScore(userId);
     }
+
 }

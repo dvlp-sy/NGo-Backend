@@ -10,20 +10,22 @@ import com.ngo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RankService
-{
+public class RankService {
     private final UserRepository userRepository;
 
-    public RankService(UserRepository userRepository) { this.userRepository = userRepository; }
+    public RankService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-    public ApiResponse<ScoreDto> patchDailyScore(Long userId)
-    {
+    public ApiResponse<ScoreDto> patchScore(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
 
-        user.setDayScore(user.getDayScore()+1L);
+        user.setDayScore(user.getDayScore() + 1L);
+        user.setWeekScore(user.getWeekScore() + 1L);
         userRepository.save(user);
 
-        return ApiResponse.success(SuccessMessage.PATCH_SCORE_SUCCESS, ScoreDto.buildDailyScore(user));
+        return ApiResponse.success(SuccessMessage.PATCH_SCORE_SUCCESS, ScoreDto.buildScore(user));
     }
+
 }
