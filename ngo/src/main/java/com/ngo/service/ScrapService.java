@@ -4,10 +4,7 @@ import com.ngo.common.ApiResponse;
 import com.ngo.common.exception.NotFoundException;
 import com.ngo.common.message.ErrorMessage;
 import com.ngo.common.message.SuccessMessage;
-import com.ngo.dto.MemoDto;
-import com.ngo.dto.MemoGetDto;
-import com.ngo.dto.ScrapDto;
-import com.ngo.dto.ScrapListDto;
+import com.ngo.dto.*;
 import com.ngo.model.Memo;
 import com.ngo.model.Scrap;
 import com.ngo.model.User;
@@ -68,11 +65,14 @@ public class ScrapService
 
     public ApiResponse<ScrapDto> deleteScrap(Long userId, Long scrapId)
     {
-        User user = userRepository.findById(userId)
+        userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
 
         Scrap scrap = scrapRepository.findById(scrapId)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.SCRAP_NOT_FOUND));
+
+        if (!userId.equals(scrap.getUser().getUserId()))
+            throw new NotFoundException(ErrorMessage.SCRAP_NOT_FOUND);
 
         scrapRepository.delete(scrap);
         return ApiResponse.success(SuccessMessage.DELETE_SCRAP_SUCCESS);
@@ -81,6 +81,24 @@ public class ScrapService
     /**
      * 메모 관리
      */
+
+    public ApiResponse<MemoListDto> getAllMemos(Long userId, Long scrapId)
+    {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
+
+        Scrap scrap = scrapRepository.findById(scrapId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.SCRAP_NOT_FOUND));
+
+        if (!userId.equals(scrap.getUser().getUserId()))
+            throw new NotFoundException(ErrorMessage.SCRAP_NOT_FOUND);
+
+        List<MemoGetDto> memoDtoList = memoRepository.findByScrap_ScrapId(scrapId).stream()
+                .map(MemoGetDto::build)
+                .toList();
+
+        return ApiResponse.success(SuccessMessage.GET_MEMO_SUCCESS, new MemoListDto(scrapId, memoDtoList));
+    }
 
     public ApiResponse<MemoGetDto> postMemo(Long userId, Long scrapId, MemoDto memoDto)
     {
@@ -100,6 +118,24 @@ public class ScrapService
 
         memoRepository.save(memo);
         return ApiResponse.success(SuccessMessage.POST_MEMO_SUCESS, MemoGetDto.build(memo));
+    }
+
+    public ApiResponse<MemoGetDto> deleteMemo(Long userId, Long scrapId, Long memoId)
+    {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
+
+        Scrap scrap = scrapRepository.findById(scrapId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.SCRAP_NOT_FOUND));
+
+        if (!userId.equals(scrap.getUser().getUserId()))
+            throw new NotFoundException(ErrorMessage.SCRAP_NOT_FOUND);
+
+        Memo memo = memoRepository.findById(memoId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.MEMO_NOT_FOUND));
+        memoRepository.delete(memo);
+
+        return ApiResponse.success(SuccessMessage.DELETE_MEMO_SUCCESS);
     }
 
 }

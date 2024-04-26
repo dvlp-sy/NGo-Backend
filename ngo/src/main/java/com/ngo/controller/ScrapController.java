@@ -1,10 +1,7 @@
 package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
-import com.ngo.dto.MemoDto;
-import com.ngo.dto.MemoGetDto;
-import com.ngo.dto.ScrapDto;
-import com.ngo.dto.ScrapListDto;
+import com.ngo.dto.*;
 import com.ngo.service.ScrapService;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,9 +38,21 @@ public class ScrapController
      * 메모 관리
      */
 
+    @GetMapping("/user/{userId}/scrap/{scrapId}/memo")
+    public ApiResponse<MemoListDto> getAllMemos(@PathVariable("userId") Long userId, @PathVariable("scrapId") Long scrapId)
+    {
+        return scrapService.getAllMemos(userId, scrapId);
+    }
+
     @PostMapping("/user/{userId}/scrap/{scrapId}/memo")
     public ApiResponse<MemoGetDto> postMemo(@PathVariable("userId") Long userId, @PathVariable("scrapId") Long scrapId, @RequestBody MemoDto memoDto)
     {
         return scrapService.postMemo(userId, scrapId, memoDto);
+    }
+
+    @DeleteMapping("/user/{userId}/scrap/{scrapId}/memo/{memoId}")
+    public ApiResponse<MemoGetDto> deleteMemo(@PathVariable("userId") Long userId, @PathVariable("scrapId") Long scrapId, @PathVariable("memoId") Long memoId)
+    {
+        return scrapService.deleteMemo(userId, scrapId, memoId);
     }
 }
