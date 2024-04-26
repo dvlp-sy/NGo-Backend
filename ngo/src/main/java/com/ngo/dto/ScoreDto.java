@@ -6,26 +6,26 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class ScoreDto
-{
+public class ScoreDto {
     Long userId;
     String userName;
-    Long score;
+    Long dailyScore;
+    Long weeklyScore;
 
     @Builder(access = AccessLevel.PRIVATE)
-    private ScoreDto(Long userId, String userName, Long score)
-    {
+    private ScoreDto(Long userId, String userName, Long dailyScore, Long weeklyScore) {
         this.userId = userId;
         this.userName = userName;
-        this.score = score;
+        this.dailyScore = dailyScore;
+        this.weeklyScore = weeklyScore;
     }
 
-    public static ScoreDto buildDailyScore(User user)
-    {
+    public static ScoreDto buildScore(User user) {
         return ScoreDto.builder()
                 .userId(user.getUserId())
                 .userName(user.getUserName())
-                .score(user.getDayScore())
+                .dailyScore(user.getDayScore())
+                .weeklyScore(user.getWeekScore())
                 .build();
     }
 
