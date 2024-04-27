@@ -26,5 +26,10 @@ public class RankController
         return rankService.initDailyScore();
     }
 
+    @PatchMapping("/weekly-rank")
+    public ApiResponse<ScoreDto> initWeeklyScore()
+    {
+        return rankService.initWeeklyScore();
+    }
 
 }

@@ -43,6 +43,19 @@ public class RankService {
 
     }
 
-    
+    public ApiResponse<ScoreDto> initWeeklyScore()
+    {
+        List<User> userList = userRepository.findAll();
+        for (User user : userList)
+        {
+            user.setWeekScore(0L);
+            userRepository.save(user);
+        }
+
+        return ApiResponse.success(SuccessMessage.INIT_SCORE_SUCCESS);
+
+    }
+
+
 
 }
