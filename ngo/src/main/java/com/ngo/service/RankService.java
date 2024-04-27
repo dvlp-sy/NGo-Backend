@@ -9,6 +9,8 @@ import com.ngo.model.User;
 import com.ngo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RankService {
     private final UserRepository userRepository;
@@ -27,5 +29,20 @@ public class RankService {
 
         return ApiResponse.success(SuccessMessage.PATCH_SCORE_SUCCESS, ScoreDto.buildScore(user));
     }
+
+    public ApiResponse<ScoreDto> initDailyScore()
+    {
+        List<User> userList = userRepository.findAll();
+        for (User user : userList)
+        {
+            user.setDayScore(0L);
+            userRepository.save(user);
+        }
+
+        return ApiResponse.success(SuccessMessage.INIT_SCORE_SUCCESS);
+
+    }
+
+    
 
 }

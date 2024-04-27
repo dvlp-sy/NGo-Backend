@@ -20,4 +20,11 @@ public class RankController
         return rankService.patchScore(userId);
     }
 
+    @PatchMapping("/daily-rank")
+    public ApiResponse<ScoreDto> initDailyScore()
+    {
+        return rankService.initDailyScore();
+    }
+
+
 }
