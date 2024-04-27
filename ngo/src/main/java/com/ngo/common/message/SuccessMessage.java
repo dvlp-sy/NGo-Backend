@@ -43,7 +43,8 @@ public enum SuccessMessage
     /**
      * Rank
      */
-    PATCH_SCORE_SUCCESS(OK, "스코어 업데이트에 성공했습니다")
+    PATCH_SCORE_SUCCESS(OK, "스코어 업데이트에 성공했습니다"),
+    INIT_SCORE_SUCCESS(OK, "스코어 초기화에 성공했습니다")
 
     ;
 
