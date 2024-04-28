@@ -29,6 +29,12 @@ public enum SuccessMessage
     /**
      * Scrap
      */
+    GET_SCRAP_SUCCESS(OK, "스크랩 불러오기에 성공했습니다"),
+    POST_SCRAP_SUCCESS(CREATED, "스크랩 업로드에 성공했습니다"),
+    DELETE_SCRAP_SUCCESS(NO_CONTENT, "스크랩 삭제에 성공했습니다"),
+    GET_MEMO_SUCCESS(OK, "메모 불러오기에 성공했습니다"),
+    POST_MEMO_SUCESS(CREATED, "메모 업로드에 성공했습니다"),
+    DELETE_MEMO_SUCCESS(NO_CONTENT, "메모 삭제에 성공했습니다"),
 
     /**
      * Dictionary
@@ -37,6 +43,9 @@ public enum SuccessMessage
     /**
      * Rank
      */
+    GET_RANK_SUCCESS(OK, "랭킹 불러오기에 성공했습니다"),
+    PATCH_SCORE_SUCCESS(OK, "스코어 업데이트에 성공했습니다"),
+    INIT_SCORE_SUCCESS(OK, "스코어 초기화에 성공했습니다")
 
     ;
 
