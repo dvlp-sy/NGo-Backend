@@ -43,6 +43,7 @@ public enum SuccessMessage
     /**
      * Rank
      */
+    GET_RANK_SUCCESS(OK, "랭킹 불러오기에 성공했습니다"),
     PATCH_SCORE_SUCCESS(OK, "스코어 업데이트에 성공했습니다"),
     INIT_SCORE_SUCCESS(OK, "스코어 초기화에 성공했습니다")
 
