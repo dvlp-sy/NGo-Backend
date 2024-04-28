@@ -22,6 +22,12 @@ public class RankController
         return rankService.getDailyRank(userId);
     }
 
+    @GetMapping("/user/{userId}/weekly-rank")
+    public ApiResponse<RankDto> getWeeklyRank(@PathVariable("userId") Long userId)
+    {
+        return rankService.getWeeklyRank(userId);
+    }
+
     @PatchMapping("/user/{userId}/rank")
     public ApiResponse<ScoreDto> patchScore(@PathVariable("userId") Long userId)
     {

@@ -54,6 +54,36 @@ public class RankService {
 
     }
 
+    public ApiResponse<RankDto> getWeeklyRank(Long userId)
+    {
+        RankDto rankDto = new RankDto();
+
+        userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
+
+        List<User> userList = userRepository.findAll().stream()
+                .sorted(Comparator.comparing(User::getWeekScore).reversed())
+                .toList();
+
+        long userRank = 0L;
+        List<UserRankDto> userRankDtoList = new ArrayList<>();
+        for (User user : userList)
+        {
+            userRank++;
+            userRankDtoList.add(new UserRankDto(user.getUserId(), userRank, user.getUserName()));
+            if (userId.equals(user.getUserId()))
+            {
+                rankDto.setUserId(userId);
+                rankDto.setUserName(user.getUserName());
+                rankDto.setUserRank(userRank);
+            }
+        }
+
+        rankDto.setUserRankDtoList(userRankDtoList);
+        return ApiResponse.success(SuccessMessage.GET_RANK_SUCCESS, rankDto);
+
+    }
+
     public ApiResponse<ScoreDto> patchScore(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
