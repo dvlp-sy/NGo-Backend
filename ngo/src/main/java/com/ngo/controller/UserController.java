@@ -14,13 +14,19 @@ public class UserController
     public UserController(UserService userService) { this.userService = userService; }
 
     /**
-     * 회원가입
+     * 회원가입 및 회원탈퇴
      */
 
     @PostMapping("/users/register")
-    public ApiResponse<RegisterDto> registerUser(@RequestBody RegisterDto registerDto)
+    public ApiResponse<Void> registerUser(@RequestBody RegisterDto registerDto)
     {
         return userService.registerUser(registerDto);
+    }
+
+    @DeleteMapping("/users/{userId}/withdrawal")
+    public ApiResponse<Void> withdrawalUser(@PathVariable("userId") Long userId)
+    {
+        return userService.withdrawalUser(userId);
     }
 
     /**
@@ -36,6 +42,12 @@ public class UserController
     public ApiResponse<UserLevelDto> patchUserLevel(@PathVariable("userId") Long userId, @RequestBody UserLevelDto userLevelDto)
     {
         return userService.patchUserLevel(userId, userLevelDto);
+    }
+
+    @PatchMapping("/users/{userId}/pw")
+    public ApiResponse<Void> patchUserPw(@PathVariable("userId") Long userId, @RequestBody String newPw)
+    {
+        return userService.patchUserPw(userId, newPw);
     }
 
     /**
