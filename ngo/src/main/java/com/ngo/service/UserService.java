@@ -5,10 +5,7 @@ import com.ngo.common.exception.ConflictException;
 import com.ngo.common.exception.NotFoundException;
 import com.ngo.common.message.ErrorMessage;
 import com.ngo.common.message.SuccessMessage;
-import com.ngo.dto.AttDto;
-import com.ngo.dto.AttListDto;
-import com.ngo.dto.UserDto;
-import com.ngo.dto.UserLevelDto;
+import com.ngo.dto.*;
 import com.ngo.model.Attendance;
 import com.ngo.model.User;
 import com.ngo.repository.AttendanceRepository;
@@ -31,6 +28,17 @@ public class UserService
     {
         this.userRepository = userRepository;
         this.attendanceRepository = attendanceRepository;
+    }
+
+    /**
+     * 회원가입
+     */
+
+    public ApiResponse<RegisterDto> registerUser(RegisterDto registerDto)
+    {
+        User user = User.build(registerDto);
+        userRepository.save(user);
+        return ApiResponse.success(SuccessMessage.REGISTER_USER_SUCCESS);
     }
 
     /**
@@ -124,4 +132,6 @@ public class UserService
         return ApiResponse.success(SuccessMessage.POST_USER_ATTENDANCE_SUCCESS, AttDto.build(attendance));
 
     }
+
+
 }

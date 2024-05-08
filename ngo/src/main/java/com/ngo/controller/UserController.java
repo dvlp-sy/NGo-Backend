@@ -1,10 +1,7 @@
 package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
-import com.ngo.dto.AttDto;
-import com.ngo.dto.AttListDto;
-import com.ngo.dto.UserDto;
-import com.ngo.dto.UserLevelDto;
+import com.ngo.dto.*;
 import com.ngo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +11,16 @@ public class UserController
     private final UserService userService;
 
     public UserController(UserService userService) { this.userService = userService; }
+
+    /**
+     * 회원가입
+     */
+
+    @PostMapping("/users/register")
+    public ApiResponse<RegisterDto> registerUser(@RequestBody RegisterDto registerDto)
+    {
+        return userService.registerUser(registerDto);
+    }
 
     /**
      * 유저 정보 관리
