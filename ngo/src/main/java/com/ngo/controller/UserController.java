@@ -6,6 +6,7 @@ import com.ngo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 public class UserController
 {
     private final UserService userService;
@@ -25,13 +26,13 @@ public class UserController
     /**
      * 유저 정보 관리
      */
-    @GetMapping("/user/{userId}")
+    @GetMapping("/users/{userId}")
     public ApiResponse<UserDto> getUser(@PathVariable("userId") Long userId)
     {
         return userService.getUser(userId);
     }
 
-    @PatchMapping("/user/{userId}/level")
+    @PatchMapping("/users/{userId}/level")
     public ApiResponse<UserLevelDto> patchUserLevel(@PathVariable("userId") Long userId, @RequestBody UserLevelDto userLevelDto)
     {
         return userService.patchUserLevel(userId, userLevelDto);
@@ -41,19 +42,19 @@ public class UserController
      * 출석 정보 관리
      */
 
-    @GetMapping("/user/{userId}/attendance")
+    @GetMapping("/users/{userId}/attendances")
     public ApiResponse<AttListDto> getUserAttendance(@PathVariable("userId") Long userId)
     {
         return userService.getUserAttendance(userId);
     }
 
-    @GetMapping("user/{userId}/recentAttendance")
+    @GetMapping("users/{userId}/recentAttendances")
     public ApiResponse<AttListDto> getRecentAttendance(@PathVariable("userId") Long userId)
     {
         return userService.getRecentAttendance(userId);
     }
 
-    @PostMapping("/user/{userId}/attendance")
+    @PostMapping("/users/{userId}/attendances")
     public ApiResponse<AttDto> postUserAttendance(@PathVariable("userId") Long userId)
     {
         return userService.postUserAttendance(userId);
