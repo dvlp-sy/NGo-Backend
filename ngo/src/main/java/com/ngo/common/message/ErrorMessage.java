@@ -13,6 +13,7 @@ public enum ErrorMessage
     /**
      * Login
      */
+    PASSWORD_NOT_MATCH(UNAUTHORIZED, "패스워드가 일치하지 않습니다"),
 
     /**
      * User

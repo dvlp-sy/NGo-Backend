@@ -14,6 +14,7 @@ public enum SuccessMessage
      * Login
      */
 
+    LOGIN_SUCCESS(CREATED, "로그인에 성공했습니다"),
     /**
      * User
      */
