@@ -17,6 +17,7 @@ public enum SuccessMessage
     /**
      * User
      */
+    REGISTER_USER_SUCCESS(CREATED, "회원가입에 성공했습니다"),
     GET_USER_SUCCESS(OK, "유저 정보 불러오기에 성공했습니다"),
     GET_USER_ATTENDANCE_SUCCESS(OK, "출석 정보 불러오기에 성공했습니다"),
     POST_USER_ATTENDANCE_SUCCESS(CREATED, "출석 정보 업데이트에 성공했습니다"),
