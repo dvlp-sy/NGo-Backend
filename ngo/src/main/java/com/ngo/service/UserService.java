@@ -10,6 +10,7 @@ import com.ngo.model.Attendance;
 import com.ngo.model.User;
 import com.ngo.repository.AttendanceRepository;
 import com.ngo.repository.UserRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -31,14 +32,27 @@ public class UserService
     }
 
     /**
-     * 회원가입
+     * 회원가입 및 회원탈퇴
      */
 
-    public ApiResponse<RegisterDto> registerUser(RegisterDto registerDto)
+    public ApiResponse<Void> registerUser(RegisterDto registerDto)
     {
         User user = User.build(registerDto);
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            return ApiResponse.error(ErrorMessage.REGISTER_NOT_ALLOW);
+        }
         return ApiResponse.success(SuccessMessage.REGISTER_USER_SUCCESS);
+    }
+
+    public ApiResponse<Void> withdrawalUser(Long userId)
+    {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
+
+        userRepository.delete(user);
+        return ApiResponse.success(SuccessMessage.WITHDRAWAL_USER_SUCCESS);
     }
 
     /**
