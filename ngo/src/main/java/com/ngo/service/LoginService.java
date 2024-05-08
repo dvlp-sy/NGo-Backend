@@ -43,5 +43,22 @@ public class LoginService
 
         return ApiResponse.success(SuccessMessage.LOGIN_SUCCESS);
     }
-    
+
+    /**
+     * 로그아웃
+     */
+
+    public ApiResponse<Void> logoutUser(HttpServletRequest request, HttpServletResponse response)
+    {
+        HttpSession session = request.getSession(false);
+        if (session != null)
+            session.invalidate();
+
+        Cookie cookie = new Cookie("userId", null);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        return ApiResponse.success(SuccessMessage.LOGOUT_SUCCESS);
+    }
 }

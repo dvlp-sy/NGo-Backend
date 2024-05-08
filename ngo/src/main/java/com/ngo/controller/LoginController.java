@@ -24,4 +24,10 @@ public class LoginController
     {
         return loginService.loginUser(loginFormDto, request, response);
     }
+
+    @PostMapping("/users/logout")
+    public ApiResponse<Void> logoutUser(HttpServletRequest request, HttpServletResponse response)
+    {
+        return loginService.logoutUser(request, response);
+    }
 }
