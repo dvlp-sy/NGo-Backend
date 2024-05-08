@@ -77,6 +77,17 @@ public class UserService
         return ApiResponse.success(SuccessMessage.PATCH_USER_LEVEL_SUCCESS, userLevelDto);
     }
 
+    public ApiResponse<Void> patchUserPw(Long userId, String newPw)
+    {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
+
+        user.setLoginPw(newPw);
+        userRepository.save(user);
+
+        return ApiResponse.success(SuccessMessage.PATCH_USER_PW_SUCCESS);
+    }
+
     /**
      * 출석 정보 관리
      */

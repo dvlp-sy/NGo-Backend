@@ -44,6 +44,12 @@ public class UserController
         return userService.patchUserLevel(userId, userLevelDto);
     }
 
+    @PatchMapping("/users/{userId}/pw")
+    public ApiResponse<Void> patchUserPw(@PathVariable("userId") Long userId, @RequestBody String newPw)
+    {
+        return userService.patchUserPw(userId, newPw);
+    }
+
     /**
      * 출석 정보 관리
      */
