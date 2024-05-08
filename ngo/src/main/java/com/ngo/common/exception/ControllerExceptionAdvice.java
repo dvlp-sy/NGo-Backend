@@ -11,6 +11,16 @@ import static org.springframework.http.HttpStatus.*;
 public class ControllerExceptionAdvice
 {
     /**
+     * 401 UNAUTHORIZED
+     */
+
+    @ExceptionHandler({UnauthorizedException.class})
+    public ResponseEntity<ApiResponse> UnauthorizedException(BaseException exception)
+    {
+        return ResponseEntity.status(UNAUTHORIZED).body(ApiResponse.error(exception.getError(), exception.getMessage()));
+    }
+
+    /**
      * 404 NOT FOUND
      */
 
@@ -29,9 +39,5 @@ public class ControllerExceptionAdvice
     {
         return ResponseEntity.status(CONFLICT).body(ApiResponse.error(exception.getError(), exception.getMessage()));
     }
-
-    /**
-     * 500 INTERNAL SERVER ERROR
-     */
 
 }
