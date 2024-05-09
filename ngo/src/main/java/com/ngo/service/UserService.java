@@ -5,14 +5,12 @@ import com.ngo.common.exception.ConflictException;
 import com.ngo.common.exception.NotFoundException;
 import com.ngo.common.message.ErrorMessage;
 import com.ngo.common.message.SuccessMessage;
-import com.ngo.dto.AttDto;
-import com.ngo.dto.AttListDto;
-import com.ngo.dto.UserDto;
-import com.ngo.dto.UserLevelDto;
+import com.ngo.dto.*;
 import com.ngo.model.Attendance;
 import com.ngo.model.User;
 import com.ngo.repository.AttendanceRepository;
 import com.ngo.repository.UserRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -31,6 +29,30 @@ public class UserService
     {
         this.userRepository = userRepository;
         this.attendanceRepository = attendanceRepository;
+    }
+
+    /**
+     * 회원가입 및 회원탈퇴
+     */
+
+    public ApiResponse<Void> registerUser(RegisterDto registerDto)
+    {
+        User user = User.build(registerDto);
+        try {
+            userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            return ApiResponse.error(ErrorMessage.REGISTER_NOT_ALLOW);
+        }
+        return ApiResponse.success(SuccessMessage.REGISTER_USER_SUCCESS);
+    }
+
+    public ApiResponse<Void> withdrawalUser(Long userId)
+    {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
+
+        userRepository.delete(user);
+        return ApiResponse.success(SuccessMessage.WITHDRAWAL_USER_SUCCESS);
     }
 
     /**
@@ -53,6 +75,17 @@ public class UserService
         userRepository.save(user);
 
         return ApiResponse.success(SuccessMessage.PATCH_USER_LEVEL_SUCCESS, userLevelDto);
+    }
+
+    public ApiResponse<Void> patchUserPw(Long userId, String newPw)
+    {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
+
+        user.setLoginPw(newPw);
+        userRepository.save(user);
+
+        return ApiResponse.success(SuccessMessage.PATCH_USER_PW_SUCCESS);
     }
 
     /**
@@ -124,4 +157,6 @@ public class UserService
         return ApiResponse.success(SuccessMessage.POST_USER_ATTENDANCE_SUCCESS, AttDto.build(attendance));
 
     }
+
+
 }

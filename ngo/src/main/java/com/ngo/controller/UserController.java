@@ -1,14 +1,12 @@
 package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
-import com.ngo.dto.AttDto;
-import com.ngo.dto.AttListDto;
-import com.ngo.dto.UserDto;
-import com.ngo.dto.UserLevelDto;
+import com.ngo.dto.*;
 import com.ngo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 public class UserController
 {
     private final UserService userService;
@@ -16,37 +14,59 @@ public class UserController
     public UserController(UserService userService) { this.userService = userService; }
 
     /**
+     * 회원가입 및 회원탈퇴
+     */
+
+    @PostMapping("/users/register")
+    public ApiResponse<Void> registerUser(@RequestBody RegisterDto registerDto)
+    {
+        return userService.registerUser(registerDto);
+    }
+
+    @DeleteMapping("/users/{userId}/withdrawal")
+    public ApiResponse<Void> withdrawalUser(@PathVariable("userId") Long userId)
+    {
+        return userService.withdrawalUser(userId);
+    }
+
+    /**
      * 유저 정보 관리
      */
-    @GetMapping("/user/{userId}")
+    @GetMapping("/users/{userId}")
     public ApiResponse<UserDto> getUser(@PathVariable("userId") Long userId)
     {
         return userService.getUser(userId);
     }
 
-    @PatchMapping("/user/{userId}/level")
+    @PatchMapping("/users/{userId}/level")
     public ApiResponse<UserLevelDto> patchUserLevel(@PathVariable("userId") Long userId, @RequestBody UserLevelDto userLevelDto)
     {
         return userService.patchUserLevel(userId, userLevelDto);
+    }
+
+    @PatchMapping("/users/{userId}/pw")
+    public ApiResponse<Void> patchUserPw(@PathVariable("userId") Long userId, @RequestBody String newPw)
+    {
+        return userService.patchUserPw(userId, newPw);
     }
 
     /**
      * 출석 정보 관리
      */
 
-    @GetMapping("/user/{userId}/attendance")
+    @GetMapping("/users/{userId}/attendances")
     public ApiResponse<AttListDto> getUserAttendance(@PathVariable("userId") Long userId)
     {
         return userService.getUserAttendance(userId);
     }
 
-    @GetMapping("user/{userId}/recentAttendance")
+    @GetMapping("users/{userId}/recentAttendances")
     public ApiResponse<AttListDto> getRecentAttendance(@PathVariable("userId") Long userId)
     {
         return userService.getRecentAttendance(userId);
     }
 
-    @PostMapping("/user/{userId}/attendance")
+    @PostMapping("/users/{userId}/attendances")
     public ApiResponse<AttDto> postUserAttendance(@PathVariable("userId") Long userId)
     {
         return userService.postUserAttendance(userId);

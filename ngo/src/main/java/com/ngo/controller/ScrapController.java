@@ -6,6 +6,7 @@ import com.ngo.service.ScrapService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 public class ScrapController
 {
     private final ScrapService scrapService;
@@ -16,19 +17,19 @@ public class ScrapController
      * 스크랩 관리
      */
 
-    @GetMapping("/user/{userId}/scrap")
+    @GetMapping("/users/{userId}/scraps")
     public ApiResponse<ScrapListDto> getAllScraps(@PathVariable("userId") Long userId)
     {
         return scrapService.getAllScraps(userId);
     }
 
-    @PostMapping("/user/{userId}/scrap")
+    @PostMapping("/users/{userId}/scraps")
     public ApiResponse<ScrapDto> postScrap(@PathVariable("userId") Long userId, @RequestBody ScrapDto scrapDto)
     {
         return scrapService.postScrap(userId, scrapDto);
     }
 
-    @DeleteMapping("/user/{userId}/scrap/{scrapId}")
+    @DeleteMapping("/users/{userId}/scraps/{scrapId}")
     public ApiResponse<ScrapDto> deleteScrap(@PathVariable("userId") Long userId, @PathVariable("scrapId") Long scrapId)
     {
         return scrapService.deleteScrap(userId, scrapId);
@@ -38,19 +39,19 @@ public class ScrapController
      * 메모 관리
      */
 
-    @GetMapping("/user/{userId}/scrap/{scrapId}/memo")
+    @GetMapping("/users/{userId}/scraps/{scrapId}/memos")
     public ApiResponse<MemoListDto> getAllMemos(@PathVariable("userId") Long userId, @PathVariable("scrapId") Long scrapId)
     {
         return scrapService.getAllMemos(userId, scrapId);
     }
 
-    @PostMapping("/user/{userId}/scrap/{scrapId}/memo")
+    @PostMapping("/users/{userId}/scraps/{scrapId}/memos")
     public ApiResponse<MemoGetDto> postMemo(@PathVariable("userId") Long userId, @PathVariable("scrapId") Long scrapId, @RequestBody MemoDto memoDto)
     {
         return scrapService.postMemo(userId, scrapId, memoDto);
     }
 
-    @DeleteMapping("/user/{userId}/scrap/{scrapId}/memo/{memoId}")
+    @DeleteMapping("/users/{userId}/scraps/{scrapId}/memos/{memoId}")
     public ApiResponse<MemoGetDto> deleteMemo(@PathVariable("userId") Long userId, @PathVariable("scrapId") Long scrapId, @PathVariable("memoId") Long memoId)
     {
         return scrapService.deleteMemo(userId, scrapId, memoId);

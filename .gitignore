@@ -8,3 +8,5 @@
 .idea/gradle.xml
 .idea/compiler.xml
 .idea/workspace.xml
+ngo-crawling/config.py
+ngo-crawling/__pycache__/*

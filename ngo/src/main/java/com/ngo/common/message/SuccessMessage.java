@@ -13,14 +13,19 @@ public enum SuccessMessage
     /**
      * Login
      */
+    LOGIN_SUCCESS(CREATED, "로그인에 성공했습니다"),
+    LOGOUT_SUCCESS(CREATED, "로그아웃에 성공했습니다"),
 
     /**
      * User
      */
+    REGISTER_USER_SUCCESS(CREATED, "회원가입에 성공했습니다"),
+    WITHDRAWAL_USER_SUCCESS(NO_CONTENT, "회원탈퇴에 성공했습니다"),
     GET_USER_SUCCESS(OK, "유저 정보 불러오기에 성공했습니다"),
     GET_USER_ATTENDANCE_SUCCESS(OK, "출석 정보 불러오기에 성공했습니다"),
     POST_USER_ATTENDANCE_SUCCESS(CREATED, "출석 정보 업데이트에 성공했습니다"),
     PATCH_USER_LEVEL_SUCCESS(OK, "레벨 정보 업데이트에 성공했습니다"),
+    PATCH_USER_PW_SUCCESS(OK, "비밀번호 변경에 성공했습니다"),
 
     /**
      * News
@@ -39,6 +44,7 @@ public enum SuccessMessage
     /**
      * Dictionary
      */
+    GET_WORDS_SUCCESS(OK, "사전 불러오기에 성공했습니다"),
 
     /**
      * Rank
