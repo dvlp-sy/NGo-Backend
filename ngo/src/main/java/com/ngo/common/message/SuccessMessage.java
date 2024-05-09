@@ -44,6 +44,7 @@ public enum SuccessMessage
     /**
      * Dictionary
      */
+    GET_WORDS_SUCCESS(OK, "사전 불러오기에 성공했습니다"),
 
     /**
      * Rank
