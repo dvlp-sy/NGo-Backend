@@ -31,6 +31,7 @@ public enum SuccessMessage
      * News
      */
     POST_TODAY_NEWS_SUCCESS(CREATED, "오늘의 뉴스 생성에 성공했습니다"),
+    GET_TODAY_NEWS_SUCCESS(OK, "오늘의 뉴스 불러오기에 성공했습니다"),
 
     /**
      * Scrap
