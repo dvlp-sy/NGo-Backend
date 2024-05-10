@@ -27,6 +27,11 @@ public class NewsService
 
     }
 
+    public ApiResponse<List<TodayNews>> getTodayNews(String level)
+    {
+        List<TodayNews> todayNewsList = todayNewsRepository.findAllByLevel(level);
+        return ApiResponse.success(SuccessMessage.GET_TODAY_NEWS_SUCCESS, todayNewsList);
+    }
     public ApiResponse<Void> postTodayNews()
     {
         Map todayNewsData;
