@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -89,5 +91,26 @@ public class NewsService
     public ApiResponse<Map<String, String>> getAllMedia()
     {
         return ApiResponse.success(SuccessMessage.GET_MEDIA_SUCCESS, mediaRepository.getAllMedia());
+    }
+
+    public ApiResponse<Map> getAllMediaNews(String mediaId)
+    {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        String dateStr = dateFormat.format(date);
+
+        String url = "http://localhost:8004/getMediaNews?oid="+mediaId+"&date="+dateStr;
+        Map newsData;
+        try {
+            newsData = webClient.get()
+                    .uri(url)
+                    .retrieve()
+                    .bodyToMono(Map.class)
+                    .block();
+        } catch(Exception e) {
+            throw new IllegalStateException("뉴스를 불러오는 과정에서 오류가 발생했습니다");
+        }
+
+        return ApiResponse.success(SuccessMessage.GET_MEDIA_NEWS_SUCCESS, newsData);
     }
 }

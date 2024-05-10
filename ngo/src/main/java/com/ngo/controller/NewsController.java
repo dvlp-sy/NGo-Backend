@@ -43,4 +43,10 @@ public class NewsController
         return newsService.getAllMedia();
     }
 
+    @GetMapping("/media/{mediaId}")
+    public ApiResponse<Map> getAllMediaNews(@PathVariable("mediaId") String mediaId)
+    {
+        return newsService.getAllMediaNews(mediaId);
+    }
+
 }
