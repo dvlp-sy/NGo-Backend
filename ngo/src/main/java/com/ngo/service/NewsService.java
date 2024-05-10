@@ -3,6 +3,7 @@ package com.ngo.service;
 import com.ngo.common.ApiResponse;
 import com.ngo.common.message.SuccessMessage;
 import com.ngo.model.TodayNews;
+import com.ngo.repository.MediaRepository;
 import com.ngo.repository.TodayNewsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
@@ -15,23 +16,30 @@ import java.util.Map;
 public class NewsService
 {
     private final TodayNewsRepository todayNewsRepository;
+    private final MediaRepository mediaRepository;
     private final WebClient webClient;
 
-    public NewsService(TodayNewsRepository todayNewsRepository)
+    public NewsService(TodayNewsRepository todayNewsRepository, MediaRepository mediaRepository)
     {
         ExchangeStrategies strategies = ExchangeStrategies.builder()
                 .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(100 * 1024 * 1024))
                 .build();
         this.webClient = WebClient.builder().exchangeStrategies(strategies).build();
         this.todayNewsRepository = todayNewsRepository;
+        this.mediaRepository = mediaRepository;
 
     }
+
+    /**
+     * 오늘의 신문
+     */
 
     public ApiResponse<List<TodayNews>> getTodayNews(String level)
     {
         List<TodayNews> todayNewsList = todayNewsRepository.findAllByLevel(level);
         return ApiResponse.success(SuccessMessage.GET_TODAY_NEWS_SUCCESS, todayNewsList);
     }
+
     public ApiResponse<Void> postTodayNews()
     {
         Map todayNewsData;
@@ -72,5 +80,14 @@ public class NewsService
                 }
             }
         }
+    }
+
+    /**
+     * 언론사별 신문
+     */
+
+    public ApiResponse<Map<String, String>> getAllMedia()
+    {
+        return ApiResponse.success(SuccessMessage.GET_MEDIA_SUCCESS, mediaRepository.getAllMedia());
     }
 }

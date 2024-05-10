@@ -6,6 +6,7 @@ import com.ngo.service.NewsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -18,15 +19,28 @@ public class NewsController
         this.newsService = newsService;
     }
 
+    /**
+     * 오늘의 신문
+     */
     @GetMapping("/today-news")
-    ApiResponse<List<TodayNews>> getTodayNews(@RequestParam("level") String level)
+    public ApiResponse<List<TodayNews>> getTodayNews(@RequestParam("level") String level)
     {
         return newsService.getTodayNews(level);
     }
 
     @PostMapping("/today-news")
-    ApiResponse<Void> postTodayNews()
+    public ApiResponse<Void> postTodayNews()
     {
         return newsService.postTodayNews();
     }
+
+    /**
+     * 언론사별 신문
+     */
+    @GetMapping("/media")
+    public ApiResponse<Map<String, String>> getAllMedia()
+    {
+        return newsService.getAllMedia();
+    }
+
 }
