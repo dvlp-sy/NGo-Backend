@@ -116,11 +116,9 @@ public class UserService
         /* recent week date */
         for (int day=0; day<7; day++)
         {
-            date = date.minusDays(day);
+            date = date.minusDays(1);
             recentDateList.add(date);
         }
-
-        System.out.println(recentDateList);
 
         List<AttDto> attDtoList = attendanceRepository.findByUser_UserId(userId).stream()
                 .filter(attendance -> {
