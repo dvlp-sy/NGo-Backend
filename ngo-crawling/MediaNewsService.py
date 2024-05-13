@@ -8,8 +8,8 @@ app4 = Flask(__name__)
 @app4.route("/getMediaNews", methods=["GET"])
 def get_media_news() :
     q_media = request.args.get("oid")
-    #q_date = request.args.get("date")
-    q_date = "20240510"
+    q_date = request.args.get("date")
+
     response = requests.get(f"https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid={q_media}&listType=paper&date={q_date}")
     if (response.status_code == 200) :
         html = response.text

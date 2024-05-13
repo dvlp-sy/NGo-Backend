@@ -1,107 +1,74 @@
-from config import LEVEL_COOKIE
 import requests
+import re
+from requests_toolbelt import MultipartEncoder
 from flask import Flask, request, jsonify
-import time
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
-
-MAX_WAIT_TIME = 20
 
 app2 = Flask(__name__)
 
-def compare(n1, n2) :
-    if n1["level"] > n2["level"] : 
-        return True
+def limit(text) :
+    ## 특수문자 제한
+    regExp = re.compile(r'[^ㄱ-힣a-zA-Z0-9\.\?\,\!\s]', re.UNICODE) 
+    regExpEmoji = re.compile(r'[\U0001F000-\U0001F9FF]', re.UNICODE)
+    text = regExp.sub("", text)
+    text = regExpEmoji.sub("", text)
+    return text
+
+def format(text, max_len) :
+    text = limit(text)
+    if (len(text) > max_len) :
+        return text[:max_len]
     else :
-        return False
+        return text
 
-def scroll_down(driver):
-    driver.execute_script("window.scrollTo(0, 50);")
 
-def waitClick(driver, xpath) :
-    checkBox = WebDriverWait(driver, MAX_WAIT_TIME).until(
-        EC.visibility_of_element_located((By.XPATH, xpath))
-    )
-    checkBox.click()
+def fetchLevel(title, content) :
 
-def fetchLevel(title, contents, driver) :
-    url = "https://www.kread.ai/"
+    # POST (KreadNo 값 불러오기)
+    post_url = "https://www.kread.ai/api/v1/kread/insert"
+    title = format(title, 100)
+    content = format(content, 1000)
+    form_data = {
+        "userTp": "ET",
+        "docuTp": "R",
+        "dataTp": "TEXT",
+        "title": title,
+        "contents": content
+    }
+    header = {
+        "Content-Type" : "multipart/form-data; boundary=----WebKitFormBoundaryBB7CU3zBBGxE9Fix"
+    }
 
-    data = driver.get(url)
-    WebDriverWait(driver, MAX_WAIT_TIME)
-    driver.maximize_window()
+    multipart = MultipartEncoder(fields=form_data, boundary="----WebKitFormBoundaryBB7CU3zBBGxE9Fix", encoding="UTF-8")
 
-    waitClick(driver, '/html/body/header/button')
-    waitClick(driver, '//*[@id="gnb"]/ul/li[2]/strong')
-    waitClick(driver, '//*[@id="gnb"]/ul/li[2]/ul/li[1]/a')
+    if (title != None and content != None) :
+        response = requests.post(post_url, data=multipart, headers=header)
+        post_data = response.json()
+        if response.status_code == 200 :
+            kreadNo = post_data["data"]["kreadNo"]
 
-    ### Form 작성
-    driver.execute_script("window.scrollTo(0, 100)")
-    check1 = driver.find_element(By.XPATH, '//*[@id="frm"]/fieldset/dl/dd[1]/div[5]/label')
-    check2 = driver.find_element(By.XPATH, '//*[@id="frm"]/fieldset/dl/dd[2]/div[2]/label')
-    check3 = driver.find_element(By.XPATH, '//*[@id="title"]')
-    check4 = driver.find_element(By.XPATH, '//*[@id="contents"]')
-    submit = driver.find_element(By.XPATH, '//*[@id="regSubmit"]')
 
-    ActionChains(driver).move_to_element(check1).click(check1).perform()
-    time.sleep(1)
-    ActionChains(driver).move_to_element(check2).click(check2).perform()
-    time.sleep(1)
 
-    ActionChains(driver).move_to_element(check3).click(check3)
-    time.sleep(3)
-    ActionChains(driver).send_keys(title).perform()
-    time.sleep(3)
+    # GET (level 요청하기)
+    get_url = f"https://www.kread.ai/api/v1/kread/detail?kreadNo={kreadNo}"
+    response = requests.get(get_url)
+    get_data = response.json()
+    count = 1
 
-    ActionChains(driver).move_to_element(check4)
-    time.sleep(3)
-    ActionChains(driver).send_keys(contents).perform()
-    time.sleep(5)
+    while (response.status_code != 200 or get_data["data"]["status"] != 2) and count <= 30 :
+        response = requests.get(get_url)
+        get_data = response.json()
+        count += 1
 
-    ActionChains(driver).move_to_element(submit).click().perform()
-    time.sleep(10)
-
-    
-    
-    
-
-    '''
-    driver.find_element(By.CSS_SELECTOR, "#frm > fieldset > dl > dd:nth-child(2) > div:nth-child(5) > label").click()
-    time.sleep(1)
-    driver.find_element(By.CSS_SELECTOR, "#frm > fieldset > dl > dd:nth-child(4) > div:nth-child(2) > label").click()
-    time.sleep(1)
-    
-
-    '''
-    
-    ### Parsing Result
-    html = driver.page_source
-    soup = BeautifulSoup(html, "html.parser")
-
-    return soup.select_one("#kreadScore").text
+    if kreadNo != None :
+        return get_data["data"]["score"]
+    else :
+        return 2000
 
 
 @app2.route("/getLevel", methods=["GET"])
 def get_level() :
     # 정치 = 100 | 경제 = 101 | 사회 = 102 | 생활/문화 = 103 | 과학 = 105
     query = request.args.get("category")
-
-    header = {
-        "User-Agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Cookie" : LEVEL_COOKIE
-    }
-
-    chrome_options = Options()
-    #chrome_options.add_argument("--headless") # 화면 표시 X
-    chrome_options.add_argument(f"--user-agent={header['User-Agent']}")
-    chrome_options.add_argument(f"--cookie={header['Cookie']}")
-
-    driver = webdriver.Chrome(options=chrome_options)
 
     if query :
         result = []
@@ -116,20 +83,25 @@ def get_level() :
             newsList = data["news"]
             for news in newsList :
                 title = news["title"]
-                contents = news["contents"]
-                level = fetchLevel(title, contents, driver)
+                content = news["contents"]
+                level = fetchLevel(title, content)
                 result.append(
                     {
-                        "title" : title,
-                        "contents" : contents,
+                        "title" : news["title"],
+                        "contents" : news["contents"],
                         "media" : news["media"],
                         "editor" : news["editor"],
                         "thumbnail" : news["thumbnail"],
+                        "summary" : news["summary"],
                         "level" : level
                     }
                 )
         
-        return sorted(result, key=lambda x: x["level"])
+        return jsonify(
+            {
+                "news" : sorted(result, key=lambda x: x["level"])
+            }
+        )
     
 
 
