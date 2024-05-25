@@ -9,6 +9,14 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
 
+/**
+ * ==== ====
+ * @package : com.ngo.model
+ * @name : Attendance.java
+ * @date : 
+ * @author : siyunsmacbook
+*/
+
 @Getter
 @Setter
 @Table
@@ -29,10 +37,8 @@ public class Attendance
     @JsonBackReference
     private User user;
 
-    @Autowired
     public Attendance() {}
 
-    @Autowired
     public Attendance(LocalDate date, User user)
     {
         this.date = date;
