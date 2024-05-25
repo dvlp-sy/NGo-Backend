@@ -1,6 +1,7 @@
 package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
+import com.ngo.model.Media;
 import com.ngo.model.TodayNews;
 import com.ngo.service.NewsService;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ public class NewsController
      * 언론사별 신문
      */
     @GetMapping("/media")
-    public ApiResponse<Map<String, String>> getAllMedia()
+    public ApiResponse<Map<String, List<Media>>> getAllMedia()
     {
         return newsService.getAllMedia();
     }

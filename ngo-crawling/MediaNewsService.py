@@ -48,15 +48,16 @@ def get_media_news() :
                     url = url["href"]
                     urlList.append(url)
 
-            newsList.append(
-                {
-                    "mainUrl" : mainUrl,
-                    "image" : image,
-                    "title" : title,
-                    "summary" : summary,
-                    "urlList" : urlList
-                }
-            )
+            if ((mainUrl != None) and (title != None)) :
+                newsList.append(
+                    {
+                        "mainUrl" : mainUrl,
+                        "image" : image,
+                        "title" : title,
+                        "summary" : summary,
+                        "urlList" : urlList
+                    }
+                )
 
         return jsonify(
             {

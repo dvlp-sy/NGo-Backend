@@ -2,6 +2,7 @@ package com.ngo.service;
 
 import com.ngo.common.ApiResponse;
 import com.ngo.common.message.SuccessMessage;
+import com.ngo.model.Media;
 import com.ngo.model.TodayNews;
 import com.ngo.repository.MediaRepository;
 import com.ngo.repository.TodayNewsRepository;
@@ -11,6 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -88,9 +90,12 @@ public class NewsService
      * 언론사별 신문
      */
 
-    public ApiResponse<Map<String, String>> getAllMedia()
+    public ApiResponse<Map<String, List<Media>>> getAllMedia()
     {
-        return ApiResponse.success(SuccessMessage.GET_MEDIA_SUCCESS, mediaRepository.getAllMedia());
+        List<Media> mediaList = mediaRepository.findAll();
+        Map<String, List<Media>> mediaMap = new HashMap<>();
+        mediaMap.put("mediaList", mediaList);
+        return ApiResponse.success(SuccessMessage.GET_MEDIA_SUCCESS, mediaMap);
     }
 
     public ApiResponse<Map> getAllMediaNews(String mediaId)
