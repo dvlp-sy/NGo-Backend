@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * ==== News Controller for Retrieving TodayNews and MediaNews ====
+ * @package : com.ngo.controller
+ * @name : NewsController.java
+ * @date : 2024. 05. 10.
+ * @author : siyunsmacbook
+*/
 @RestController
 @RequestMapping("/api")
 public class NewsController

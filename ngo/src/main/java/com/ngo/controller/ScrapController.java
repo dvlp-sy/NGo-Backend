@@ -5,6 +5,13 @@ import com.ngo.dto.*;
 import com.ngo.service.ScrapService;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * ==== Scrap Controller for Retrieving Scrap Contents ====
+ * @package : com.ngo.controller
+ * @name : ScrapController.java
+ * @date : 2024. 04. 20.
+ * @author : siyunsmacbook
+*/
 @RestController
 @RequestMapping("/api")
 public class ScrapController

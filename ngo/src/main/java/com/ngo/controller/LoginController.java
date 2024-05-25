@@ -8,6 +8,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * ==== LoginController for Login and Logout ====
+ * @package : com.ngo.controller
+ * @name : LoginController.java
+ * @date : 2024. 05. 09.
+ * @author : siyunsmacbook
+*/
+
 @RestController
 @RequestMapping("/api")
 public class LoginController

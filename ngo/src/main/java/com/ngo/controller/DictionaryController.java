@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * ==== Dictionary Controller for Retrieving Dictionary Search Results ====
+ * @package : com.ngo.controller
+ * @name : DictionaryController.java
+ * @date : 2024. 05. 09.
+ * @author : siyunsmacbook
+*/
+
 @RestController
 @RequestMapping("/api")
 public class DictionaryController
