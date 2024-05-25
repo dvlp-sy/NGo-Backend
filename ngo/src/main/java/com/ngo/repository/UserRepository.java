@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.Optional;
 
 /**
- * ==== UserRepository Interface====
+ * ==== UserRepository Interface ====
  * @package : com.ngo.repository
  * @name : UserRepository.java
  * @date : 2024. 04. 16.
