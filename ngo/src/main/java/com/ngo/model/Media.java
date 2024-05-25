@@ -4,6 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * ==== Media entity mapping class====
+ * @package : com.ngo.model
+ * @name : Media.java
+ * @date : 2024. 04. 13.
+ * @author : siyunsmacbook
+*/
+
 @Getter
 @Setter
 @Table

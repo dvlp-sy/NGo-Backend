@@ -9,6 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * ==== Scrap entity mapping class ====
+ * @package : com.ngo.model
+ * @name : Scrap.java
+ * @date : 2024. 04. 13.
+ * @author : siyunsmacbook
+*/
+
 @Getter
 @Setter
 @Table

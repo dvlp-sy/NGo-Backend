@@ -13,7 +13,7 @@ import java.time.LocalDate;
  * ==== ====
  * @package : com.ngo.model
  * @name : Attendance.java
- * @date : 
+ * @date : 2024. 04. 13.
  * @author : siyunsmacbook
 */
 
