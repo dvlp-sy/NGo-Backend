@@ -44,7 +44,7 @@ public class DictionaryService
                     .bodyToMono(Map.class)
                     .block();
         } catch(Exception e) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("검색 결과를 불러오는 과정에서 오류가 발생했습니다");
         }
 
         WordListDto wordListDto = createWordListDto(word, wordData);

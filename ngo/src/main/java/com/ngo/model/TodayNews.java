@@ -2,6 +2,8 @@ package com.ngo.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -34,8 +36,30 @@ public class TodayNews
     @Column
     private String editor;
 
-    @OneToMany(mappedBy = "todayNews", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<Text> texts = new HashSet<>();
+    @Column
+    private String thumbnail;
+
+    @Column
+    private String summary;
+
+    @Column(length = 5000)
+    private String contents;
+
+    @Column
+    private String level;
+
+    public TodayNews() {}
+
+    @Builder(access = AccessLevel.PUBLIC)
+    public TodayNews(String title, String media, String editor, String thumbnail, String summary, String contents, String level)
+    {
+        this.title = title;
+        this.media = media;
+        this.editor = editor;
+        this.thumbnail = thumbnail;
+        this.summary = summary;
+        this.contents = contents;
+        this.level = level;
+    }
 
 }

@@ -38,10 +38,8 @@ public class Scrap
     @JsonManagedReference
     private Set<Memo> memos = new HashSet<>();
 
-    @Autowired
     public Scrap() {}
 
-    @Autowired
     @Builder(access = AccessLevel.PUBLIC)
     public Scrap(String title, String link, String media, User user)
     {
