@@ -5,6 +5,17 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * MemoGetDto is used to construct the response format of Api.
+ * <pre>{@code
+ * private final Long memoId;
+ * private final String content;
+ * }</pre>
+ * @package : com.ngo.dto
+ * @name : MemoGetDto.java
+ * @date : 2024. 04. 24.
+ * @author : siyunsmacbook
+*/
 @Getter
 public class MemoGetDto
 {

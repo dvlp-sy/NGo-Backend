@@ -6,6 +6,17 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
+/**
+ * ScrapListDto is used to construct the response format of Api.
+ * <pre>{@code
+ *     private final Long userId;
+ *     private final List<ScrapDto> scrapDtoList;
+ * }</pre>
+ * @package : com.ngo.dto
+ * @name : ScrapListDto.java
+ * @date : 2024. 04. 24.
+ * @author : siyunsmacbook
+*/
 
 @Getter
 public class ScrapListDto

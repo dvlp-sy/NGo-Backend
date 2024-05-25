@@ -7,6 +7,18 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 
+/**
+ * AttDto is used to construct the response format of Api.
+ * <pre>{@code
+ * private final Long attendanceId;
+ * private final LocalDate date;
+ * }</pre>
+ * @package : com.ngo.dto
+ * @name : AttDto.java
+ * @date : 2024. 04. 17.
+ * @author : siyunsmacbook
+*/
+
 @Getter
 public class AttDto
 {
