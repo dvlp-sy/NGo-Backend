@@ -16,6 +16,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * NewsService class offers TodayNews and MediaNews features.
+ * <pre>{@code
+ * // getTodayNews
+ * public ApiResponse<List<TodayNews>> getTodayNews(String level);
+ * // postTodayNews
+ * public ApiResponse<Void> postTodayNews();
+ * // getAllMedia
+ * public ApiResponse<Map<String, List<Media>>> getAllMedia();
+ * // getAllMediaNews
+ * public ApiResponse<Map> getAllMediaNews(String mediaId);
+ * }</pre>
+ * @package : com.ngo.service
+ * @name : NewsService.java
+ * @date : 2024. 05. 10.
+ * @author : siyunsmacbook
+*/
 @Service
 public class NewsService
 {

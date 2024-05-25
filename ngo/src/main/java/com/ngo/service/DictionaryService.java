@@ -18,6 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * DictionaryService class offers dictionary search features.
+ * <pre>{@code
+ * public ApiResponse<WordListDto> getWords(String word);
+ * }</pre>
+ * @package : com.ngo.service
+ * @name : DictionaryService.java
+ * @date : 2024. 05. 09.
+ * @author : siyunsmacbook
+*/
+
 @Service
 public class DictionaryService
 {

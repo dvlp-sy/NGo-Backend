@@ -13,6 +13,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
+/**
+ * LoginService class offers login and logout features.
+ * <pre>{@code
+ * public ApiResponse<Void> loginUser(LoginFormDto loginFormDto, HttpServletRequest request, HttpServletResponse response);
+ * public ApiResponse<Void> logoutUser(HttpServletRequest request, HttpServletResponse response);
+ * }</pre>
+ * @package : com.ngo.service
+ * @name : LoginService.java
+ * @date : 2024. 05. 09.
+ * @author : siyunsmacbook
+*/
+
 @Service
 public class LoginService
 {
