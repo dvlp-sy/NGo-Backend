@@ -1,9 +1,21 @@
 import requests
+import re
 from flask import Flask, request, jsonify
 from bs4 import BeautifulSoup
 
 app1 = Flask(__name__)
 
+def parse_url(url) :
+    pattern = r'/article/(\d+)/(\d+)'
+    match_url = re.search(pattern, url)
+
+    if match_url :
+        media_code = match_url.group(1)
+        article_code = match_url.group(2)
+        return media_code, article_code
+    else :
+        return None, None
+    
 @app1.route("/getNews", methods=["GET"])
 def get_news() :
     # 정치 = 100 | 경제 = 101 | 사회 = 102 | 생활/문화 = 103 | 과학 = 105
@@ -69,6 +81,9 @@ def get_news() :
                 else :
                     thumbnail = ""
 
+                media_code, article_code = parse_url(url)
+                print(media_code, article_code)
+
                 newsList.append(
                     {
                         "title" : title,
@@ -76,11 +91,12 @@ def get_news() :
                         "contents" : contents,
                         "media" : media,
                         "editor" : editor,
-                        "thumbnail" : thumbnail
+                        "thumbnail" : thumbnail,
+                        "media_code" : media_code,
+                        "article_code" : article_code
                     }
                 )
-                
-
+            
         return jsonify(
             {
                 "news" : newsList

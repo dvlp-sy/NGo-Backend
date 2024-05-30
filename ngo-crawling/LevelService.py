@@ -58,6 +58,7 @@ def fetchLevel(title, content) :
         response = requests.get(get_url)
         get_data = response.json()
         count += 1
+        print(count)
 
     if kreadNo != None :
         return get_data["data"]["score"]
@@ -93,7 +94,9 @@ def get_level() :
                         "editor" : news["editor"],
                         "thumbnail" : news["thumbnail"],
                         "summary" : news["summary"],
-                        "level" : level
+                        "level" : level,
+                        "media_code" : news["media_code"],
+                        "article_code" : news["article_code"]
                     }
                 )
         

@@ -4,12 +4,14 @@ from flask import Flask, request, jsonify
 
 app3 = Flask(__name__)
 
+lock = threading.Lock()
+
 def getLevel(query, high, mid, low) :
-    response = requests.get(f"http://localhost:8002/getNews?category={query}")
+    response = requests.get(f"http://localhost:8002/getLevel?category={query}")
     if (response.status_code == 200) :
         data = response.json()
         newsList = data["news"]
-        print(data)
+        
         high.append(newsList[0])
         mid.append(newsList[len(data)//2])
         low.append(newsList[len(data)-1])
