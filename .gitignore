@@ -10,3 +10,8 @@
 .idea/workspace.xml
 ngo-crawling/config.py
 ngo-crawling/__pycache__/*
+ngo-crawling/chromedriver
+ngo-crawling/test.py
+ngo-crawling/docker-compose.yml
+ngo-crawling/Dockerfile
+ngo-crawling/requirements.txt

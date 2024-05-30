@@ -7,6 +7,14 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * ==== AttendanceRepository Interface ====
+ * @package : com.ngo.repository
+ * @name : AttendanceRepository.java
+ * @date : 2024. 04. 17.
+ * @author : siyunsmacbook
+*/
+
 @RepositoryRestResource
 public interface AttendanceRepository extends JpaRepository<Attendance, Long>
 {

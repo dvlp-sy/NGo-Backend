@@ -5,6 +5,13 @@ import com.ngo.dto.*;
 import com.ngo.service.ScrapService;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * ==== Scrap Controller for Retrieving Scrap Contents ====
+ * @package : com.ngo.controller
+ * @name : ScrapController.java
+ * @date : 2024. 04. 20.
+ * @author : siyunsmacbook
+*/
 @RestController
 @RequestMapping("/api")
 public class ScrapController
@@ -16,6 +23,13 @@ public class ScrapController
     /**
      * 스크랩 관리
      */
+
+    @GetMapping("/users/{userId}/scraps/{scrapId}")
+    public ApiResponse<NewsDto> getScrap(@PathVariable("userId") Long userId,
+                                         @PathVariable("scrapId") Long scrapId)
+    {
+        return scrapService.getScrap(userId, scrapId);
+    }
 
     @GetMapping("/users/{userId}/scraps")
     public ApiResponse<ScrapListDto> getAllScraps(@PathVariable("userId") Long userId)

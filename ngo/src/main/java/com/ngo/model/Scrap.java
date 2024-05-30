@@ -9,6 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * ==== Scrap entity mapping class ====
+ * @package : com.ngo.model
+ * @name : Scrap.java
+ * @date : 2024. 04. 13.
+ * @author : siyunsmacbook
+*/
+
 @Getter
 @Setter
 @Table
@@ -29,6 +37,12 @@ public class Scrap
     @Column
     private String media;
 
+    @Column
+    private String mediaCode;
+
+    @Column
+    private String articleCode;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
@@ -38,17 +52,17 @@ public class Scrap
     @JsonManagedReference
     private Set<Memo> memos = new HashSet<>();
 
-    @Autowired
     public Scrap() {}
 
-    @Autowired
     @Builder(access = AccessLevel.PUBLIC)
-    public Scrap(String title, String link, String media, User user)
+    public Scrap(String title, String link, String media, String mediaCode, String articleCode, User user)
     {
         this.title = title;
         this.link = link;
         this.media = media;
         this.user = user;
+        this.mediaCode = mediaCode;
+        this.articleCode = articleCode;
     }
 
 }

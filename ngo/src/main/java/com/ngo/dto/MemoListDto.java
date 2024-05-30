@@ -6,6 +6,18 @@ import lombok.Getter;
 
 import java.util.List;
 
+/**
+ * MemoListDto is used to construct the response format of Api.
+ * <pre>{@code
+ * private final Long scrapId;
+ * private final List<MemoGetDto> memoList;
+ * }</pre>
+ * @package : com.ngo.dto
+ * @name : MemoListDto.java
+ * @date : 2024. 04. 26.
+ * @author : siyunsmacbook
+*/
+
 @Getter
 public class MemoListDto
 {

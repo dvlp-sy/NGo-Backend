@@ -18,6 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * DictionaryService class offers dictionary search features.
+ * <pre>{@code
+ * public ApiResponse<WordListDto> getWords(String word);
+ * }</pre>
+ * @package : com.ngo.service
+ * @name : DictionaryService.java
+ * @date : 2024. 05. 09.
+ * @author : siyunsmacbook
+*/
+
 @Service
 public class DictionaryService
 {
@@ -44,7 +55,7 @@ public class DictionaryService
                     .bodyToMono(Map.class)
                     .block();
         } catch(Exception e) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("검색 결과를 불러오는 과정에서 오류가 발생했습니다");
         }
 
         WordListDto wordListDto = createWordListDto(word, wordData);

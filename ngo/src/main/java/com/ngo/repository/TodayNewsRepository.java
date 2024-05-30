@@ -1,21 +1,21 @@
 package com.ngo.repository;
 
-import com.ngo.model.Scrap;
+import com.ngo.model.TodayNews;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
 /**
- * ==== ScrapRepository Interface ====
+ * ==== TodayNewsRepository Interface ====
  * @package : com.ngo.repository
- * @name : ScrapRepository.java
- * @date : 2024. 04. 20.
+ * @name : TodayNewsRepository.java
+ * @date : 2024. 05. 10.
  * @author : siyunsmacbook
 */
 
 @RepositoryRestResource
-public interface ScrapRepository extends JpaRepository<Scrap, Long>
+public interface TodayNewsRepository extends JpaRepository<TodayNews, Integer>
 {
-    public List<Scrap> findByUser_UserId(Long userId);
+    List<TodayNews> findAllByLevel(String level);
 }
