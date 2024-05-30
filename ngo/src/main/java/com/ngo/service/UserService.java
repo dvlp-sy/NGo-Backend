@@ -18,6 +18,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * UserService offers user management and attendance features.
+ * <pre>{@code
+ * // Join and Withdraw
+ * public ApiResponse<Void> registerUser(RegisterDto registerDto);
+ * public ApiResponse<Void> withdrawalUser(Long userId);
+ * // User
+ * public ApiResponse<UserDto> getUser(Long userId);
+ * public ApiResponse<UserLevelDto> patchUserLevel(Long userId, UserLevelDto userLevelDto);
+ * public ApiResponse<Void> patchUserPw(Long userId, String newPw);
+ * // Attendance
+ * public ApiResponse<AttListDto> getUserAttendance(Long userId);
+ * public ApiResponse<AttListDto> getRecentAttendance(Long userId);
+ * public ApiResponse<AttDto> postUserAttendance(Long userId);
+ * }</pre>
+ * @package : com.ngo.service
+ * @name : UserService.java
+ * @date : 2024. 04. 16.
+ * @author : siyunsmacbook
+*/
 
 @Service
 public class UserService

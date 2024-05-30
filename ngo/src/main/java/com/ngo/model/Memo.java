@@ -8,6 +8,14 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * ==== Memo entity mapping class ====
+ * @package : com.ngo.model
+ * @name : Memo.java
+ * @date : 2024. 04. 13.
+ * @author : siyunsmacbook
+*/
+
 @Getter
 @Setter
 @Table

@@ -19,6 +19,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * ScrapService offers scrap management features.
+ * <pre>{@code
+ * // getAllScraps
+ * public ApiResponse<ScrapListDto> getAllScraps(Long userId);
+ * // postScrap
+ * public ApiResponse<ScrapDto> postScrap(Long userId, ScrapDto scrapDto);
+ * // deleteScrap
+ * public ApiResponse<ScrapDto> deleteScrap(Long userId, Long scrapId);
+ * // getAllMemos
+ * public ApiResponse<MemoListDto> getAllMemos(Long userId, Long scrapId);
+ * // postMemo
+ * public ApiResponse<MemoGetDto> postMemo(Long userId, Long scrapId, MemoDto memoDto);
+ * // deleteMemo
+ * public ApiResponse<MemoGetDto> deleteMemo(Long userId, Long scrapId, Long memoId);
+ * }</pre>
+ * @package : com.ngo.service
+ * @name : ScrapService.java
+ * @date : 2024. 04. 20.
+ * @author : siyunsmacbook
+*/
+
 @Service
 public class ScrapService
 {

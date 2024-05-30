@@ -5,12 +5,25 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * ScoreDto is used to construct the response format of Api.
+ * <pre>{@code
+ *     private final Long userId;
+ *     private final String userName;
+ *     private final Long dailyScore;
+ *     private final Long weeklyScore;
+ * }</pre>
+ * @package : com.ngo.dto
+ * @name : ScoreDto.java
+ * @date : 2024. 04. 27.
+ * @author : siyunsmacbook
+*/
 @Getter
 public class ScoreDto {
-    Long userId;
-    String userName;
-    Long dailyScore;
-    Long weeklyScore;
+    private final Long userId;
+    private final String userName;
+    private final Long dailyScore;
+    private final Long weeklyScore;
 
     @Builder(access = AccessLevel.PRIVATE)
     private ScoreDto(Long userId, String userName, Long dailyScore, Long weeklyScore) {

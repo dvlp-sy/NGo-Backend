@@ -12,6 +12,14 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * ==== TodayNews entity mapping class ====
+ * @package : com.ngo.model
+ * @name : TodayNews.java
+ * @date : 2024. 04. 13.
+ * @author : siyunsmacbook
+*/
+
 @Getter
 @Setter
 @Table

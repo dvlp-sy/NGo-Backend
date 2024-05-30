@@ -5,6 +5,14 @@ import com.ngo.dto.*;
 import com.ngo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * ==== User Controller for User and Attendance Information Management ====
+ * @package : com.ngo.controller
+ * @name : UserController.java
+ * @date : 2024. 04. 16.
+ * @author : siyunsmacbook
+*/
+
 @RestController
 @RequestMapping("/api")
 public class UserController

@@ -16,6 +16,26 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * RankService offers user ranking features.
+ * <pre>{@code
+ * // getDailyRank
+ * public ApiResponse<RankDto> getDailyRank(Long userId);
+ * // getWeeklyRank
+ * public ApiResponse<RankDto> getWeeklyRank(Long userId);
+ * // patchScore
+ * public ApiResponse<ScoreDto> patchScore(Long userId);
+ * // initDailyScore
+ * public ApiResponse<ScoreDto> initDailyScore();
+ * // initWeeklyScore
+ * public ApiResponse<ScoreDto> initWeeklyScore();
+ * }</pre>
+ * @package : com.ngo.service
+ * @name : RankService.java
+ * @date : 2024. 04. 27.
+ * @author : siyunsmacbook
+*/
+
 @Service
 public class RankService {
     private final UserRepository userRepository;

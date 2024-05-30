@@ -6,6 +6,14 @@ import com.ngo.dto.ScoreDto;
 import com.ngo.service.RankService;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * ==== Rank Controller to Fetch Ranking ====
+ * @package : com.ngo.controller
+ * @name : RankController.java
+ * @date :2024. 04. 27.
+ * @author : siyunsmacbook
+*/
+
 @RestController
 @RequestMapping("/api")
 public class RankController
