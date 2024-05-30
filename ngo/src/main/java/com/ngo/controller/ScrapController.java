@@ -17,6 +17,13 @@ public class ScrapController
      * 스크랩 관리
      */
 
+    @GetMapping("/users/{userId}/scraps/{scrapId}")
+    public ApiResponse<NewsDto> getScrap(@PathVariable("userId") Long userId,
+                                         @PathVariable("scrapId") Long scrapId)
+    {
+        return scrapService.getScrap(userId, scrapId);
+    }
+
     @GetMapping("/users/{userId}/scraps")
     public ApiResponse<ScrapListDto> getAllScraps(@PathVariable("userId") Long userId)
     {

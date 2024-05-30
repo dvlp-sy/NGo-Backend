@@ -9,9 +9,10 @@ import lombok.AllArgsConstructor;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ScrapDto
-{
+public class ScrapDto {
     private String title;
     private String link;
     private String media;
+    private String mediaCode;
+    private String articleCode;
 }

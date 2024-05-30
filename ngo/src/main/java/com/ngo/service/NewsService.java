@@ -78,6 +78,8 @@ public class NewsService
                             .summary(newsMap.get("summary"))
                             .contents(newsMap.get("contents"))
                             .level(key)
+                            .mediaCode(newsMap.get("media_code"))
+                            .articleCode(newsMap.get("article_code"))
                             .build();
 
                     todayNewsRepository.save(todayNews);
@@ -118,4 +120,5 @@ public class NewsService
 
         return ApiResponse.success(SuccessMessage.GET_MEDIA_NEWS_SUCCESS, newsData);
     }
+
 }

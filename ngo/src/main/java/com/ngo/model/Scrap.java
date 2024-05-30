@@ -29,6 +29,12 @@ public class Scrap
     @Column
     private String media;
 
+    @Column
+    private String mediaCode;
+
+    @Column
+    private String articleCode;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
@@ -41,12 +47,14 @@ public class Scrap
     public Scrap() {}
 
     @Builder(access = AccessLevel.PUBLIC)
-    public Scrap(String title, String link, String media, User user)
+    public Scrap(String title, String link, String media, String mediaCode, String articleCode, User user)
     {
         this.title = title;
         this.link = link;
         this.media = media;
         this.user = user;
+        this.mediaCode = mediaCode;
+        this.articleCode = articleCode;
     }
 
 }

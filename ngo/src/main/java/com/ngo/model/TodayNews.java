@@ -48,10 +48,16 @@ public class TodayNews
     @Column
     private String level;
 
+    @Column
+    private String mediaCode;
+
+    @Column
+    private String articleCode;
+
     public TodayNews() {}
 
     @Builder(access = AccessLevel.PUBLIC)
-    public TodayNews(String title, String media, String editor, String thumbnail, String summary, String contents, String level)
+    public TodayNews(String title, String media, String editor, String thumbnail, String summary, String contents, String level, String mediaCode, String articleCode)
     {
         this.title = title;
         this.media = media;
@@ -60,6 +66,8 @@ public class TodayNews
         this.summary = summary;
         this.contents = contents;
         this.level = level;
+        this.mediaCode = mediaCode;
+        this.articleCode = articleCode;
     }
 
 }

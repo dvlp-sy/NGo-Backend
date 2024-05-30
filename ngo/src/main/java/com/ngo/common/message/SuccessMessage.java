@@ -34,6 +34,7 @@ public enum SuccessMessage
     GET_TODAY_NEWS_SUCCESS(OK, "오늘의 뉴스 불러오기에 성공했습니다"),
     GET_MEDIA_SUCCESS(OK, "언론사 불러오기에 성공했습니다"),
     GET_MEDIA_NEWS_SUCCESS(OK, "언론사별 뉴스 불러오기에 성공했습니다"),
+    GET_NEWS_SUCCESS(OK, "개별 뉴스 불러오기에 성공했습니다"),
 
     /**
      * Scrap
