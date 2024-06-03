@@ -1,13 +1,16 @@
+import os
 import threading
 import requests
 from flask import Flask, request, jsonify
+from dotenv import load_dotenv
 
-app3 = Flask(__name__)
+
+app = Flask(__name__)
 
 lock = threading.Lock()
 
 def getLevel(query, high, mid, low) :
-    response = requests.get(f"http://localhost:8002/getLevel?category={query}")
+    response = requests.get(f"http://news-server-02:8002/getLevel?category={query}")
     if (response.status_code == 200) :
         data = response.json()
         newsList = data["news"]
@@ -16,7 +19,7 @@ def getLevel(query, high, mid, low) :
         mid.append(newsList[len(data)//2])
         low.append(newsList[len(data)-1])
 
-@app3.route("/selectNews", methods=["GET"])
+@app.route("/selectNews", methods=["GET"])
 def select_news() :
     high = []
     mid = []
@@ -50,4 +53,5 @@ def select_news() :
     
 ### Run Flask
 if __name__ == "__main__" :
-    app3.run(port = 8003, debug=True)
+    port = int(os.environ.get("PORT", 8003))
+    app.run(host="0.0.0.0", port=port)
