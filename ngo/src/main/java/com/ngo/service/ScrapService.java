@@ -4,7 +4,12 @@ import com.ngo.common.ApiResponse;
 import com.ngo.common.exception.NotFoundException;
 import com.ngo.common.message.ErrorMessage;
 import com.ngo.common.message.SuccessMessage;
-import com.ngo.dto.*;
+import com.ngo.dto.requestDto.MemoDto;
+import com.ngo.dto.requestDto.ScrapDto;
+import com.ngo.dto.responseDto.MemoGetDto;
+import com.ngo.dto.responseDto.MemoListDto;
+import com.ngo.dto.responseDto.NewsDto;
+import com.ngo.dto.responseDto.ScrapListDto;
 import com.ngo.model.Memo;
 import com.ngo.model.Scrap;
 import com.ngo.model.User;
@@ -17,7 +22,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * ScrapService offers scrap management features.

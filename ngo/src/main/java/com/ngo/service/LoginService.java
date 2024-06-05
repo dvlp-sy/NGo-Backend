@@ -4,7 +4,7 @@ import com.ngo.common.ApiResponse;
 import com.ngo.common.exception.UnauthorizedException;
 import com.ngo.common.message.ErrorMessage;
 import com.ngo.common.message.SuccessMessage;
-import com.ngo.dto.LoginFormDto;
+import com.ngo.dto.requestDto.LoginFormDto;
 import com.ngo.model.User;
 import com.ngo.repository.UserRepository;
 import jakarta.servlet.http.Cookie;

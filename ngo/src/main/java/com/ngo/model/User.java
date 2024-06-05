@@ -1,13 +1,12 @@
 package com.ngo.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.ngo.dto.RegisterDto;
+import com.ngo.dto.requestDto.RegisterDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.Set;

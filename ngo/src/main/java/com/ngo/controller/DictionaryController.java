@@ -1,7 +1,7 @@
 package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
-import com.ngo.dto.WordListDto;
+import com.ngo.dto.responseDto.WordListDto;
 import com.ngo.service.DictionaryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
