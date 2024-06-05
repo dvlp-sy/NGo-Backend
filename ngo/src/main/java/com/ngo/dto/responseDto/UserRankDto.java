@@ -1,9 +1,6 @@
-package com.ngo.dto;
+package com.ngo.dto.responseDto;
 
-import com.ngo.model.User;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 
 /**

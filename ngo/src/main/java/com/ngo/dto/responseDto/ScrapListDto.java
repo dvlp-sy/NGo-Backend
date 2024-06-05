@@ -1,6 +1,6 @@
-package com.ngo.dto;
+package com.ngo.dto.responseDto;
 
-import com.ngo.model.Scrap;
+import com.ngo.dto.requestDto.ScrapDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
