@@ -43,6 +43,13 @@ def select_news() :
     thread_4.join()
     thread_5.join()
 
+    
+
+    ### Logic
+
+
+
+
     return jsonify(
         {
             "high" : high,
