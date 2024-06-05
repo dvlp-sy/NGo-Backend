@@ -50,7 +50,7 @@ public class TodayNews
     @Column
     private String summary;
 
-    @Column(length = 5000)
+    @Column(length = 10000)
     private String contents;
 
     @Column
