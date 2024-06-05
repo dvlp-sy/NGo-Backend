@@ -5,7 +5,12 @@ import com.ngo.common.exception.ConflictException;
 import com.ngo.common.exception.NotFoundException;
 import com.ngo.common.message.ErrorMessage;
 import com.ngo.common.message.SuccessMessage;
-import com.ngo.dto.*;
+import com.ngo.dto.requestDto.LoginPwDto;
+import com.ngo.dto.requestDto.RegisterDto;
+import com.ngo.dto.requestDto.UserLevelDto;
+import com.ngo.dto.responseDto.AttDto;
+import com.ngo.dto.responseDto.AttListDto;
+import com.ngo.dto.responseDto.UserDto;
 import com.ngo.model.Attendance;
 import com.ngo.model.User;
 import com.ngo.repository.AttendanceRepository;
@@ -15,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -97,12 +101,12 @@ public class UserService
         return ApiResponse.success(SuccessMessage.PATCH_USER_LEVEL_SUCCESS, userLevelDto);
     }
 
-    public ApiResponse<Void> patchUserPw(Long userId, String newPw)
+    public ApiResponse<Void> patchUserPw(Long userId, LoginPwDto loginPwDto)
     {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
 
-        user.setLoginPw(newPw);
+        user.setLoginPw(loginPwDto.getLoginPw());
         userRepository.save(user);
 
         return ApiResponse.success(SuccessMessage.PATCH_USER_PW_SUCCESS);
@@ -136,8 +140,8 @@ public class UserService
         /* recent week date */
         for (int day=0; day<7; day++)
         {
-            date = date.minusDays(1);
             recentDateList.add(date);
+            date = date.minusDays(1);
         }
 
         List<AttDto> attDtoList = attendanceRepository.findByUser_UserId(userId).stream()
