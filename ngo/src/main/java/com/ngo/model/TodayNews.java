@@ -65,7 +65,9 @@ public class TodayNews
     public TodayNews() {}
 
     @Builder(access = AccessLevel.PUBLIC)
-    public TodayNews(String title, String media, String editor, String thumbnail, String summary, String contents, String level, String mediaCode, String articleCode)
+    public TodayNews(String title, String media, String editor, String thumbnail,
+                     String summary, String contents, String level, String mediaCode,
+                     String articleCode, LocalDate date)
     {
         this.title = title;
         this.media = media;
@@ -76,6 +78,7 @@ public class TodayNews
         this.level = level;
         this.mediaCode = mediaCode;
         this.articleCode = articleCode;
+        this.date = date;
     }
 
 }

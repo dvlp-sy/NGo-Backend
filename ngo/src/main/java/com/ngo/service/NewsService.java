@@ -13,6 +13,7 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -70,7 +71,7 @@ public class NewsService
         Map todayNewsData;
         try {
             todayNewsData = webClient.get()
-                    .uri("http://localhost:8003/selectNews")
+                    .uri("http://13.124.142.65:8003/selectNews")
                     .retrieve()
                     .bodyToMono(Map.class)
                     .block();
@@ -101,6 +102,7 @@ public class NewsService
                             .level(key)
                             .mediaCode(newsMap.get("media_code"))
                             .articleCode(newsMap.get("article_code"))
+                            .date(LocalDate.now())
                             .build();
 
                     todayNewsRepository.save(todayNews);
@@ -127,7 +129,7 @@ public class NewsService
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         String dateStr = dateFormat.format(date);
 
-        String url = "http://localhost:8004/getMediaNews?oid="+mediaId+"&date="+dateStr;
+        String url = "http://13.124.142.65:8004/getMediaNews?oid="+mediaId+"&date="+dateStr;
         Map newsData;
         try {
             newsData = webClient.get()
@@ -163,7 +165,7 @@ public class NewsService
         Map newsData;
         try {
             newsData = webClient.get()
-                    .uri("http://localhost:8005/getOneNews?media=" + mediaCode + "&article=" + articleCode)
+                    .uri("http://13.124.142.65:8005/getOneNews?media=" + mediaCode + "&article=" + articleCode)
                     .retrieve()
                     .bodyToMono(Map.class)
                     .block();

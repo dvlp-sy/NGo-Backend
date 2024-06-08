@@ -45,7 +45,7 @@ public class DictionaryService
         Map wordData;
         try {
             wordData = webClient.get()
-                    .uri("http://localhost:8000/getWords/"+word)
+                    .uri("http://13.124.142.65:8000/getWords/"+word)
                     .retrieve()
                     .bodyToMono(Map.class)
                     .block();

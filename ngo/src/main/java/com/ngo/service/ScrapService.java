@@ -6,10 +6,7 @@ import com.ngo.common.message.ErrorMessage;
 import com.ngo.common.message.SuccessMessage;
 import com.ngo.dto.requestDto.MemoDto;
 import com.ngo.dto.requestDto.ScrapDto;
-import com.ngo.dto.responseDto.MemoGetDto;
-import com.ngo.dto.responseDto.MemoListDto;
-import com.ngo.dto.responseDto.NewsDto;
-import com.ngo.dto.responseDto.ScrapListDto;
+import com.ngo.dto.responseDto.*;
 import com.ngo.model.Memo;
 import com.ngo.model.Scrap;
 import com.ngo.model.User;
@@ -81,7 +78,7 @@ public class ScrapService
         Map newsData;
         try {
             newsData = webClient.get()
-                    .uri("http://localhost:8005/getOneNews?media=" + mediaCode + "&article=" + articleCode)
+                    .uri("http://13.124.142.65:8005/getOneNews?media=" + mediaCode + "&article=" + articleCode)
                     .retrieve()
                     .bodyToMono(Map.class)
                     .block();
@@ -109,10 +106,8 @@ public class ScrapService
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.USER_NOT_FOUND));
 
-        List<ScrapDto> scrapListDto = scrapRepository.findByUser_UserId(userId).stream()
-                .map(scrap -> {
-                    return new ScrapDto(scrap.getTitle(), scrap.getLink(), scrap.getMedia(), scrap.getMediaCode(), scrap.getArticleCode());
-                })
+        List<ScrapResponseDto> scrapListDto = scrapRepository.findByUser_UserId(userId).stream()
+                .map(ScrapResponseDto::build)
                 .toList();
 
         return ApiResponse.success(SuccessMessage.GET_SCRAP_SUCCESS, ScrapListDto.build(userId, scrapListDto));
