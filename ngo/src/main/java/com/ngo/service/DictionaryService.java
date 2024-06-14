@@ -2,18 +2,13 @@ package com.ngo.service;
 
 import com.ngo.common.ApiResponse;
 import com.ngo.common.message.SuccessMessage;
-import com.ngo.dto.WordDto;
-import com.ngo.dto.WordListDto;
+import com.ngo.dto.responseDto.WordDto;
+import com.ngo.dto.responseDto.WordListDto;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +45,7 @@ public class DictionaryService
         Map wordData;
         try {
             wordData = webClient.get()
-                    .uri("http://localhost:8000/getWords/"+word)
+                    .uri("http://13.124.142.65:8000/getWords/"+word)
                     .retrieve()
                     .bodyToMono(Map.class)
                     .block();

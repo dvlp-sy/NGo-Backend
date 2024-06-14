@@ -1,4 +1,4 @@
-package com.ngo.dto;
+package com.ngo.dto.responseDto;
 
 import lombok.AccessLevel;
 import lombok.Builder;

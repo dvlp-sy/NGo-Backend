@@ -1,9 +1,11 @@
+import os
 import requests
 import re
 from flask import Flask, request, jsonify
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 
-app1 = Flask(__name__)
+app = Flask(__name__)
 
 def parse_url(url) :
     pattern = r'/article/(\d+)/(\d+)'
@@ -16,7 +18,7 @@ def parse_url(url) :
     else :
         return None, None
     
-@app1.route("/getNews", methods=["GET"])
+@app.route("/getNews", methods=["GET"])
 def get_news() :
     # 정치 = 100 | 경제 = 101 | 사회 = 102 | 생활/문화 = 103 | 과학 = 105
     query = request.args.get("category")
@@ -106,4 +108,5 @@ def get_news() :
 
 ### Run Flask
 if __name__ == "__main__" :
-    app1.run(port=8001, debug=True)
+    port = int(os.environ.get("PORT", 8001))
+    app.run(host="0.0.0.0", port=port)

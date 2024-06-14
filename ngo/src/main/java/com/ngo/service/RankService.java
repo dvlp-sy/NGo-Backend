@@ -4,9 +4,9 @@ import com.ngo.common.ApiResponse;
 import com.ngo.common.exception.NotFoundException;
 import com.ngo.common.message.ErrorMessage;
 import com.ngo.common.message.SuccessMessage;
-import com.ngo.dto.RankDto;
-import com.ngo.dto.ScoreDto;
-import com.ngo.dto.UserRankDto;
+import com.ngo.dto.responseDto.RankDto;
+import com.ngo.dto.responseDto.ScoreDto;
+import com.ngo.dto.responseDto.UserRankDto;
 import com.ngo.model.User;
 import com.ngo.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * RankService offers user ranking features.

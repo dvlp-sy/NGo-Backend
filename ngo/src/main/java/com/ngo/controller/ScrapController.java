@@ -1,7 +1,12 @@
 package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
-import com.ngo.dto.*;
+import com.ngo.dto.requestDto.MemoDto;
+import com.ngo.dto.requestDto.ScrapDto;
+import com.ngo.dto.responseDto.MemoGetDto;
+import com.ngo.dto.responseDto.MemoListDto;
+import com.ngo.dto.responseDto.NewsDto;
+import com.ngo.dto.responseDto.ScrapListDto;
 import com.ngo.service.ScrapService;
 import org.springframework.web.bind.annotation.*;
 

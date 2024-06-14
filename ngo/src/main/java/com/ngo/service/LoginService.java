@@ -4,7 +4,8 @@ import com.ngo.common.ApiResponse;
 import com.ngo.common.exception.UnauthorizedException;
 import com.ngo.common.message.ErrorMessage;
 import com.ngo.common.message.SuccessMessage;
-import com.ngo.dto.LoginFormDto;
+import com.ngo.dto.requestDto.LoginFormDto;
+import com.ngo.dto.responseDto.UserDto;
 import com.ngo.model.User;
 import com.ngo.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
@@ -39,7 +40,7 @@ public class LoginService
      * 로그인
      */
 
-    public ApiResponse<Void> loginUser(LoginFormDto loginFormDto, HttpServletRequest request, HttpServletResponse response)
+    public ApiResponse<UserDto> loginUser(LoginFormDto loginFormDto, HttpServletRequest request, HttpServletResponse response)
     {
         User user = userRepository.findByLoginId(loginFormDto.getLoginId())
                 .filter(u -> u.getLoginPw().equals(loginFormDto.getLoginPw()))
@@ -53,7 +54,7 @@ public class LoginService
         cookie.setMaxAge(100);
         response.addCookie(cookie);
 
-        return ApiResponse.success(SuccessMessage.LOGIN_SUCCESS);
+        return ApiResponse.success(SuccessMessage.LOGIN_SUCCESS, UserDto.build(user));
     }
 
     /**
