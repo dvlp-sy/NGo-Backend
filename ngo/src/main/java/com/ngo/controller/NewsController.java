@@ -1,6 +1,8 @@
 package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
+import com.ngo.dto.requestDto.UrlDto;
+import com.ngo.dto.responseDto.NewsDto;
 import com.ngo.model.Media;
 import com.ngo.model.TodayNews;
 import com.ngo.service.NewsService;
@@ -57,4 +59,9 @@ public class NewsController
         return newsService.getAllMediaNews(mediaId);
     }
 
+    @GetMapping("/media/news")
+    public ApiResponse<NewsDto> getMediaNews(@RequestBody UrlDto urlDto)
+    {
+        return newsService.getMediaNews(urlDto);
+    }
 }

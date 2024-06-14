@@ -1,11 +1,12 @@
-#from config import
+import os
 import requests
 from flask import Flask, request, jsonify
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 
-app4 = Flask(__name__)
+app = Flask(__name__)
 
-@app4.route("/getMediaNews", methods=["GET"])
+@app.route("/getMediaNews", methods=["GET"])
 def get_media_news() :
     q_media = request.args.get("oid")
     q_date = request.args.get("date")
@@ -64,10 +65,9 @@ def get_media_news() :
                 "newsList" : newsList
             }
         )
-        
-
 
 
 ### Run Flask
 if __name__ == "__main__" :
-    app4.run(port = 8004, debug=True)
+    port = int(os.environ.get("PORT", 8004))
+    app.run(host="0.0.0.0", port=port)

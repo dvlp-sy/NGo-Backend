@@ -1,9 +1,11 @@
+import os
 import requests
 import re
 from requests_toolbelt import MultipartEncoder
 from flask import Flask, request, jsonify
+from dotenv import load_dotenv
 
-app2 = Flask(__name__)
+app = Flask(__name__)
 
 def limit(text) :
     ## 특수문자 제한
@@ -66,7 +68,7 @@ def fetchLevel(title, content) :
         return 2000
 
 
-@app2.route("/getLevel", methods=["GET"])
+@app.route("/getLevel", methods=["GET"])
 def get_level() :
     # 정치 = 100 | 경제 = 101 | 사회 = 102 | 생활/문화 = 103 | 과학 = 105
     query = request.args.get("category")
@@ -75,7 +77,7 @@ def get_level() :
         result = []
 
         # getNews (by Category)
-        url = f"http://localhost:8001/getNews?category={query}"
+        url = f"http://news-server-01:8001/getNews?category={query}"
         response = requests.get(url)
         if response.status_code == 200 :
             data = response.json()
@@ -110,4 +112,5 @@ def get_level() :
 
 ### Run Flask
 if __name__ == "__main__" :
-    app2.run(port = 8002, debug=True)
+    port = int(os.environ.get("PORT", 8002))
+    app.run(host="0.0.0.0", port=port)

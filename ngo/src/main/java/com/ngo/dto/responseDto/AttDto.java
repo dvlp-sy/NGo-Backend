@@ -1,4 +1,4 @@
-package com.ngo.dto;
+package com.ngo.dto.responseDto;
 
 import com.ngo.model.Attendance;
 import lombok.AccessLevel;

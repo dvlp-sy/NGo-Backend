@@ -19,5 +19,4 @@ import java.util.List;
 public interface AttendanceRepository extends JpaRepository<Attendance, Long>
 {
     List<Attendance> findByUser_UserId(Long userId);
-    Attendance findByDate(Date date);
 }

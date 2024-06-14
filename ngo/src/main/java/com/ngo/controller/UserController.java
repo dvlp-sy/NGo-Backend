@@ -1,7 +1,12 @@
 package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
-import com.ngo.dto.*;
+import com.ngo.dto.requestDto.LoginPwDto;
+import com.ngo.dto.requestDto.RegisterDto;
+import com.ngo.dto.requestDto.UserLevelDto;
+import com.ngo.dto.responseDto.AttDto;
+import com.ngo.dto.responseDto.AttListDto;
+import com.ngo.dto.responseDto.UserDto;
 import com.ngo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,9 +58,9 @@ public class UserController
     }
 
     @PatchMapping("/users/{userId}/pw")
-    public ApiResponse<Void> patchUserPw(@PathVariable("userId") Long userId, @RequestBody String newPw)
+    public ApiResponse<Void> patchUserPw(@PathVariable("userId") Long userId, @RequestBody LoginPwDto loginPwDto)
     {
-        return userService.patchUserPw(userId, newPw);
+        return userService.patchUserPw(userId, loginPwDto);
     }
 
     /**

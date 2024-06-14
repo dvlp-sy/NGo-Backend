@@ -35,10 +35,8 @@ public class Memo
     @JsonBackReference
     private Scrap scrap;
 
-    @Autowired
     public Memo() {}
 
-    @Autowired
     @Builder(access = AccessLevel.PUBLIC)
     public Memo(String content, Scrap scrap)
     {

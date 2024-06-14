@@ -1,4 +1,4 @@
-package com.ngo.dto;
+package com.ngo.dto.requestDto;
 
 import lombok.Getter;
 import lombok.Setter;

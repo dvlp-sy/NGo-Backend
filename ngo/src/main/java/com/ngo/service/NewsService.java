@@ -2,6 +2,8 @@ package com.ngo.service;
 
 import com.ngo.common.ApiResponse;
 import com.ngo.common.message.SuccessMessage;
+import com.ngo.dto.requestDto.UrlDto;
+import com.ngo.dto.responseDto.NewsDto;
 import com.ngo.model.Media;
 import com.ngo.model.TodayNews;
 import com.ngo.repository.MediaRepository;
@@ -11,10 +13,13 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * NewsService class offers TodayNews and MediaNews features.
@@ -66,7 +71,7 @@ public class NewsService
         Map todayNewsData;
         try {
             todayNewsData = webClient.get()
-                    .uri("http://localhost:8003/selectNews")
+                    .uri("http://13.124.142.65:8003/selectNews")
                     .retrieve()
                     .bodyToMono(Map.class)
                     .block();
@@ -97,6 +102,7 @@ public class NewsService
                             .level(key)
                             .mediaCode(newsMap.get("media_code"))
                             .articleCode(newsMap.get("article_code"))
+                            .date(LocalDate.now())
                             .build();
 
                     todayNewsRepository.save(todayNews);
@@ -123,7 +129,7 @@ public class NewsService
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         String dateStr = dateFormat.format(date);
 
-        String url = "http://localhost:8004/getMediaNews?oid="+mediaId+"&date="+dateStr;
+        String url = "http://13.124.142.65:8004/getMediaNews?oid="+mediaId+"&date="+dateStr;
         Map newsData;
         try {
             newsData = webClient.get()
@@ -136,6 +142,50 @@ public class NewsService
         }
 
         return ApiResponse.success(SuccessMessage.GET_MEDIA_NEWS_SUCCESS, newsData);
+    }
+
+    public ApiResponse<NewsDto> getMediaNews(UrlDto urlDto)
+    {
+        String mediaCode = "";
+        String articleCode = "";
+        String url = urlDto.getUrl();
+        String pattern =".*/article/(\\d+)/(\\d+).*";
+
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(url);
+
+        if (m.find())
+        {
+            mediaCode = m.group(1);
+            articleCode = m.group(2);
+        }
+        else
+            throw new IllegalStateException("잘못된 URL입니다");
+
+        Map newsData;
+        try {
+            newsData = webClient.get()
+                    .uri("http://13.124.142.65:8005/getOneNews?media=" + mediaCode + "&article=" + articleCode)
+                    .retrieve()
+                    .bodyToMono(Map.class)
+                    .block();
+        } catch(Exception e) {
+            throw new IllegalStateException("뉴스를 불러오는 과정에서 오류가 발생했습니다");
+        }
+
+        if (newsData == null || newsData.isEmpty())
+            throw new IllegalStateException("뉴스를 찾을 수 없습니다");
+
+        NewsDto newsDto = NewsDto.builder()
+                .title((String) newsData.get("title"))
+                .media((String) newsData.get("media"))
+                .editor((String) newsData.get("editor"))
+                .summary((String) newsData.get("summary"))
+                .thumbnail((String) newsData.get("thumbnail"))
+                .contents((String) newsData.get("contents"))
+                .build();
+
+        return ApiResponse.success(SuccessMessage.GET_NEWS_SUCCESS, newsDto);
     }
 
 }

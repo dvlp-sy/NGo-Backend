@@ -1,8 +1,8 @@
 package com.ngo.controller;
 
 import com.ngo.common.ApiResponse;
-import com.ngo.dto.RankDto;
-import com.ngo.dto.ScoreDto;
+import com.ngo.dto.responseDto.RankDto;
+import com.ngo.dto.responseDto.ScoreDto;
 import com.ngo.service.RankService;
 import org.springframework.web.bind.annotation.*;
 
